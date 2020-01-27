@@ -39,7 +39,7 @@ $totalimage2 = mysqli_num_rows($imagequery2);
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-sm-12 col-md-6">
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                 <?php $i=0; do{ ?>
@@ -53,7 +53,7 @@ $totalimage2 = mysqli_num_rows($imagequery2);
 
                                 <?php $i=0; do{ ?>
                                     <div class="carousel-item" id="imgid<?php echo $i; ?>">
-                                        <img class="d-block w-100" src="img/<?php  echo $showimage2['image']; ?>"  height="350" >
+                                        <img class="d-block w-100" src="img/<?php  echo $showimage2['image']; ?>"  height="500" style="object-fit: cover;" >
                                     </div>
 
                                    <?php $i++;}while($showimage2 = mysqli_fetch_assoc($imagequery2)); ?>
@@ -70,7 +70,7 @@ $totalimage2 = mysqli_num_rows($imagequery2);
                                 </a>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-sm-12 col-md-6">
                             <p>ชื่อผู้สอน : <?php  echo $showpost['m_username']; ?></p>
                             <p>กีฬาที่สอน : <?php  echo $showpost['namesport']; ?></p>
                             <p>ผลงาน : <?php  echo $showpost['detail']; ?></p>

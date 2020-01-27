@@ -1,10 +1,30 @@
+<style>
+.navbar a:hover, .dropdown:hover .dropbtn {
+
+  background-image: url("https://www.pngitem.com/pimgs/m/4-42896_colorful-smoke-transparent-background-color-transparent-smoke-png.png");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  color:white;
+}
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: rgba(0,0,0,.9);
+    background-image: url(https://www.pngitem.com/pimgs/m/4-42896_colorful-smoke-transparent-background-color-transparent-smoke-png.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(0, 0, 0);
+}
+</style>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #ebebeb;">
     <a class="navbar-brand" href="#"> <img src="http://pub-static.haozhaopian.net/assets/projects/pages/dca71680-c318-11e9-ae0a-0d283ef8239c_118a85ea-30d6-4f5d-8da4-896794ecf8b2_thumb.jpg" width="150" height="60" class="d-inline-block align-top" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
+    <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="navbarNavDropdown">
         <ul class="navbar-nav mx-auto text-md-center text-left">
 
             <li class="nav-item <?php echo $navbar[0]; ?>">
@@ -38,7 +58,7 @@
     </div>
 </nav>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -61,8 +81,44 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal2">สมัครสมาชิก</button>
-                <button type="submit" class="btn btn-primary" id="buttonlogin">ล็อกอินเข้าสู่ระบบ</button>
+            <a href="#" class="btn btn-info"data-toggle="modal" data-target="#modaladmin" style="margin-right: auto;">
+                                                <i class="fas fa-user-cog text-warning"></i>Admin
+                                            </a>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2"><i class="fas fa-user-plus"></i>สมัครสมาชิก</button>
+                <button type="submit" class="btn btn-primary" id="buttonlogin"><i class="fas fa-sign-in-alt"></i>ล็อกอินเข้าสู่ระบบ</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Admin-->
+<div class="modal fade " id="modaladmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">เข้าสู่ระบบ Admin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" name="login" id="login" method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
+                        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="กรุณากรอกชื่อผู้ใช้งาน">
+                        <small id="emailHelp" class="form-text text-muted">กรุณาใส่ชื่อผู้ใช้งานหากยังไม่มีกดที่ปุ่มสมัครสมาชิก.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">รหัสผ่าน</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="รหัสผ่านของคุณ">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="far fa-arrow-alt-circle-left"></i>ย้อนกลับ</button>
+                <button type="submit" class="btn btn-success" id="buttonlogin"><i class="fas fa-sign-in-alt"></i>ล็อกอินเข้าสู่ระบบแอดมิน</button>
                 </form>
 
             </div>

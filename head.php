@@ -4,6 +4,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=w22fesakkdz0snzdmlhx3l7rghzai4755s282iw70fhxmqn8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css">
+
 <style>
 body{
     font-family: 'Taviraj', serif;

@@ -41,7 +41,7 @@ $total = mysqli_num_rows($query);
                         <p class="form-group">เลือกเขตพื้นที่</p>
                         <div class="form-group mx-sm-3 mb-2">
                             <select class="form-control" name="search">
-                            <option>เลือกทั้งหมด</option>
+                                <option>เลือกทั้งหมด</option>
                                 <?php foreach ($aria as $value) {
                                     echo "<option>$value</option>";
                                 } ?>
@@ -56,30 +56,52 @@ $total = mysqli_num_rows($query);
                     <h5 style="text-align:center;">ประกาศสอนกีฬา</h5>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <?php if ($total > 0) {
-                            do { ?>
+                <div class="row">
+            <?php if ($total > 0) {
+                do { ?>
 
-                                <div class="card col-3" style="width: 300px; height: auto;">
-                                    <div class="card-body">
-                                        <img class="card-img-top" src="./img/<?php echo $showpost['image']; ?>" alt="Card image cap" height="300px;" width="auto">
+<div class="card" style="width: 18rem;">
+<img class="card-img-top" src="./img/<?php echo $showpost['image']; ?>" alt="Card image cap"height="300">
 
-                                        <p class="card-text">ชื่อผู้สอน :<?php echo $showpost['m_username']; ?></p>
-                                        <p class="card-text">ประเภทกีฬา :<?php echo $showpost['namesport']; ?></p>
-                                        <p class="card-text">เขตพื้นที่ :<?php echo $showpost['amphur']; ?></p>
-                                        <a href="detail.php?id=<?php echo $showpost['id']; ?>" class="btn btn-info btn-block">ดูรายละเอียดผู้สอน</button></a>
-                                        <footer class="blockquote-footer" style="font-size: 14px;">อัพเดทล่าสุด <?php echo $showpost['datetime']; ?></footer>
+  <div class="card-body">
+    <h5 class="card-title">ชื่อผู้สอน :<?php echo $showpost['m_username']; ?></h5>
+    <p class="card-text">ประเภทกีฬา :<?php echo $showpost['namesport']; ?></p>
+    <p class="card-text">เขตพื้นที่ :<?php echo $showpost['amphur']; ?></p>
+    <a href="detail.php?id=<?php echo $showpost['id']; ?>" class="btn btn-success btn-block"><i class="fas fa-comment text-warning"></i>ดูรายละเอียดผู้สอน</button></a>
 
-                                    </div>
-                                </div>
+  </div>
+  <footer class="blockquote-footer" style="font-size: 14px;">อัพเดทล่าสุด <?php echo $showpost['datetime']; ?></footer>
 
+</div>
 
             <?php } while ($showpost = mysqli_fetch_assoc($query));
-                        } else {
-                            echo "<h4 style='color:red;margin:auto;padding-top:25px;'>ไม่มีข้อมูลที่สามารถแสดงได้ณตอนนี้</h4>";
-                        } ?>
- </div>
+            } else {
+                echo "<h4 style='color:red;margin:auto;padding-top:25px;'>ไม่มีข้อมูลที่สามารถแสดงได้ณตอนนี้</h4>";
+            } ?>
+        </div>
+<div class="row">
+            <?php if ($total > 0) {
+                do { ?>
 
+<div class="card" style="width: 18rem;">
+<img class="card-img-top" src="../img/<?php echo $showpost['image']; ?>" alt="Card image cap"height="300">
+
+  <div class="card-body">
+    <h5 class="card-title">ชื่อผู้สอน :<?php echo $showpost['m_username']; ?></h5>
+    <p class="card-text">ประเภทกีฬา :<?php echo $showpost['namesport']; ?></p>
+    <p class="card-text">เขตพื้นที่ :<?php echo $showpost['amphur']; ?></p>
+    <a href="detail.php?id=<?php echo $showpost['id']; ?>" class="btn btn-info btn-block"><i class="fas fa-comment text-warning"></i>ดูรายละเอียดผู้สอน</button></a>
+
+  </div>
+  <footer class="blockquote-footer" style="font-size: 14px;">อัพเดทล่าสุด <?php echo $showpost['datetime']; ?></footer>
+
+</div>
+
+            <?php } while ($showpost = mysqli_fetch_assoc($query));
+            } else {
+                echo "<h4 style='color:red;margin:auto;padding-top:25px;'>ไม่มีข้อมูลที่สามารถแสดงได้ณตอนนี้</h4>";
+            } ?>
+        </div>
                 </div>
             </div>
         </div>
@@ -96,11 +118,14 @@ $total = mysqli_num_rows($query);
 
 </html>
 <?php
-if(isset($_REQUEST['success'])){
+if (isset($_REQUEST['success'])) {
     echo '<script>swal({
        title: "ทำการสร้างประกาศรับสอนสำเร็จ!",
        text: "ทำรายการสำเร็จกรุณากดปุ่มตกลง!",
        icon: "success",
      }); </script>';
-   }
+}
 ?>
+<script>
+
+</script>
