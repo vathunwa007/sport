@@ -1,4 +1,5 @@
 <?php
+$navbar = array("", "active","","","");
 require_once "function/connect.php";
 $postid = $_REQUEST['id'];
 $sql="SELECT * FROM tb_addcoach a INNER JOIN tb_member b

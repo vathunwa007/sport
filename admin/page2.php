@@ -13,18 +13,26 @@ $query = mysqli_query($con, $sql) or die(mysqli_error($con));
 $showpost = mysqli_fetch_array($query);
 $total = mysqli_num_rows($query);
 
+if(isset($_GET['id'])){
+  $id = $_GET['id'];
+  $sqldelete ="DELETE FROM `tb_addcoach` WHERE `tb_addcoach`.`id`=$id";
+  mysqli_query($con,$sqldelete);
+  echo '<script>location.replace("index.php?page=2")</script>';
+}
+
 ?>
+
+  <h2 class="">จัดการประกาศสอน</h2>
 <div class="card">
-    <div class="card-header">
-        <h2 class="">จัดการประกาศสอน</h2>
-    </div>
+
     <div class="card-body">
 
     <div class="row">
             <?php if ($total > 0) {
                 do { ?>
-
 <div class="card" style="width: 18rem;">
+<a href="#" onclick="deletee(<?= $showpost['id']; ?>);"><i class="fas fa-times-circle text-success"style="position:absolute; font-size:1.5rem;"></i></a>
+
 <img class="card-img-top" src="../img/<?php echo $showpost['image']; ?>" alt="Card image cap"height="300">
 
   <div class="card-body">
@@ -48,3 +56,26 @@ $total = mysqli_num_rows($query);
 </div>
 
 <!----------------------------------------------------------------------------------------------->
+<script>
+function deletee(id){
+  swal({
+    title: "คุณกำลังทำการลบผู้ประกาศสอนรายนี้?",
+    text: "กรุณาตรวจสอบความถูกต้องก่อนกดปุ่มตกลง!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      swal("ทำการลบเสร็จสมบูรณ์!", {
+        icon: "success",
+
+      });
+      location.replace("index.php?page=2&id="+id);
+
+    } else {
+      swal("ยกเลิกรายการ!");
+    }
+  });
+}
+</script>

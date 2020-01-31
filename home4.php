@@ -20,9 +20,8 @@
 
 .bg-image {
   /* The image used */
-  background-image: url("https://images.unsplash.com/photo-1485388276992-0ce5ce2d6981?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=799&q=80");
-  background-color: #cccccc;
-
+  background-color: rgb(255, 126, 126);
+ background-blend-mode: normal;
   /* Add the blur effect */
   filter: blur(8px);
   -webkit-filter: blur(8px);

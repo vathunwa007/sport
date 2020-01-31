@@ -1,3 +1,4 @@
+<?php $navbar = array("", "","active","",""); ?>
 <!DOCTYPE html>
 <html>
 <head>

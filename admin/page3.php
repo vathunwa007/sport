@@ -1,6 +1,6 @@
 <?php
 require_once "../function/connect.php";
-$sql = "SELECT a.m_username,b.id,b.namekatoo,b.detailkatoo,b.datetime
+$sql = "SELECT a.m_username,b.id,b.namekatoo,b.detailkatoo,b.datetime,b.status
 FROM tb_member a
 INNER JOIN tb_katoo b
 ON a.m_id = b.idmember";
@@ -8,42 +8,25 @@ $row = mysqli_query($con, $sql) or die(mysqli_error($con));
 $row_katoo = mysqli_fetch_assoc($row);
 $totalrow_katoo = mysqli_num_rows($row);
 $num = 0;
-?>
-<div class="card">
-    <div class="card-header">
-        <h2 class="">จัดการกระดานถาม-ตอบ</h2>
-    </div>
-    <div class="card-body">
-          <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-  เพิ่มกระทู้
-</button>
 
-<!-- Modal -->
-<div class="modal fade mt-5" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<hr>
-        <div class="table-responsive " style="width: 100%;">
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $sqldelete ="DELETE FROM `tb_katoo` WHERE `tb_katoo`.`id`=$id";
+    mysqli_query($con,$sqldelete);
+    echo '<script>location.replace("index.php?page=3")</script>';
+  }
+
+?>
+<h2 class="">จัดการกระดานถาม-ตอบ</h2>
+<div class="card">
+
+    <div class="card-body">
+        <!-- Button trigger modal -->
+
+
+        <div class="table-responsive " style="width: s;">
             <table class="table" id="datatable">
                 <thead class="text-secondary">
-                    <th> <input id="checkAll" class="check" name="checkAll" type="checkbox" value=""> </th>
 
 
                     <th>
@@ -62,7 +45,7 @@ $num = 0;
                         วัน/เวลา
                     </th>
                     <th>
-                        การตอบกลับ
+                        การตอบกลับล่าสุด
                     </th>
 
                     <th>
@@ -77,13 +60,12 @@ $num = 0;
 
                     <?php do { ?>
 
-                        <tr onclick="gotokatoo(<?php echo $row_katoo['id']; ?>);">
-                            <th><input class="check" name="record" type="checkbox" value="userId"></th>
+                        <tr>
 
-                            <th> <a href="#" data-toggle="modal" data-target="#addAndEditCateModal" data-maincate="UUID-001" data-level="1" data-catelv1="UUID-001" data-catelv2="" data-catelv3="" data-catelv4="" data-catename="ประชากรศาสตร์ ประชากรและเคหะ" data-codeid="os_01">
+                            <th> <a href="#" data-toggle="modal" data-target="#editkatoo"onclick="showkatoo(<?= $row_katoo['id']; ?>);">
                                     <i class="fas fa-edit text-success"></i>
                                 </a>
-                                <a href="#" id="btndel" onclick="numdel(this);"><i class="fas fa-trash-alt text-danger"></i></a> </td>
+                                <a href="#" id="btndel" onclick="deletee(<?= $row_katoo['id']; ?>);"><i class="fas fa-trash-alt text-danger"></i></a> </td>
                             </th>
                             <th scope="row"><?php echo $num += 1; ?></th>
 
@@ -91,7 +73,12 @@ $num = 0;
                             <td><?php echo  $row_katoo['m_username']; ?></td>
                             <td><?php echo  $row_katoo['datetime']; ?></td>
                             <td><?php echo  $row_katoo['m_username']; ?></td>
-                            <td> <input type="checkbox" id="inputStatus" checked data-toggle="toggle">
+                            <td>
+                                <?php  if($row_katoo['status'] == true){ ?>
+                                    <input type="checkbox" name="pushtoggle" id="inputStatus" data-toggle="toggle" onchange="status(<?= $row_katoo['id']; ?>)" checked>
+                                <?php }else{ ?>
+                                    <input type="checkbox" name="pushtoggle" id="inputStatus" data-toggle="toggle" onchange="status(<?= $row_katoo['id']; ?>)" >
+                               <?php  } ?>
 
                             </td>
 
@@ -103,3 +90,126 @@ $num = 0;
 
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade mt-5" id="editkatoo" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">จัดการกระดานถาม-ตอบ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" name="katoo" id="katoo" method="POST">
+                    <input type="text" name="idkatoo" id="idkatoo" hidden>
+                    <div class="form-group" id="headkatoo">
+                        <label for="exampleInputEmail1">หัวข้อกระทู้</label>
+                        <input type="text" class="form-control" name="titlekatoo" id="titlekatoo" aria-describedby="emailHelp" placeholder="กรุณาตั้งชื่อกระทู้">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">เนื้อหา</label>
+                        <textarea class="form-control" id="detailkatoo" rows="3" name="detailkatoo"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" onclick="sentkatoo()" id="btnsentkatoo" class="btn btn-primary ">เพิ่มกระทู้</button>
+                        <button type="submit" id="btneditkatoo" class="btn btn-info hide">แก้ไขกระทู้</button>
+
+                    </div>
+            </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>
+<script>
+    function sentkatoo(){
+
+            $.ajax({
+                type: "POST",
+                url: "../function/insertkatoo.php",
+                data: $("#katoo").serialize(),
+                success: function(result) {
+                    if (result.status == 1) // Success
+                    {
+                        confirm(result.message);
+
+                        $(".close").click();
+                    } else // Err
+                    {
+                        confirm(result.message);
+
+                    }
+                }
+            });
+
+
+    }
+     function showkatoo(id) {
+        $('#exampleModalScrollableTitle').text("แก้ไขกระดานถาม-ตอบ");
+        $('#btnsentkatoo').addClass('hide');
+        $('#btneditkatoo').removeClass('hide');
+
+        $.ajax({
+            type: "GET",
+            url: "../function/showkatoo.php?id=" + id,
+            success: function(result) {
+                if (result.status == 1) // Success
+                {
+                    $('#idkatoo').val(result.id);
+                    $('#titlekatoo').val(result.namekatoo);
+                    $('#detailkatoo').val(result.detailkatoo);
+
+                } else // Err
+                {
+                    alert("notshow");
+
+                }
+            }
+        });
+
+    }
+function deletee(id){
+  swal({
+    title: "คุณต้องการที่จะลบกระทู้นี้??",
+    text: "กรุณาตรวจสอบความถูกต้องก่อนกดปุ่มตกลง!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      swal("ทำการลบเสร็จสมบูรณ์!", {
+        icon: "success",
+
+      });
+      location.replace("index.php?page=3&id="+id);
+
+    } else {
+      swal("ยกเลิกรายการ!");
+    }
+  });
+}
+
+function status(id){
+    $.ajax({
+            type: "GET",
+            url: "../function/changstatus.php?id=" + id,
+            success: function(result) {
+                if (result.status == 1) // Success
+                {
+                   confirm(result.message);
+                } else // Err
+                {
+                    alert("notshow");
+
+                }
+            }
+        });
+}
+</script>

@@ -1,4 +1,5 @@
 <?php
+require_once "../function/connect.php";
 $page = (!isset($_GET['page'])) ? 0 : $_GET['page'];
 
 switch ($page) {
@@ -16,10 +17,11 @@ switch ($page) {
     case 4:
         $active4 = "mm-active";
         break;
+    case "contact":
+        $contact = "mm-active";
+        break;
     default:
-    $active1 = "mm-active";
-
-
+        $active1 = "mm-active";
 }
 ?>
 
@@ -32,9 +34,25 @@ switch ($page) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <?php include "head.php"; ?>
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+    <script>
+        function confirm(massage) {
+            swal({
+                title: massage,
+                text: "กดปุ่มตกลงเพื่อดำเนินการต่อ",
+                icon: "success",
+            });
+        }
+    </script>
 </head>
 
 <body>
+
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -77,14 +95,14 @@ switch ($page) {
                         <button class="close"></button>
                     </div>
                     <ul class="header-menu nav">
-                        <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
+                        <li class="nav-item ">
+                            <a href="index.php?page=contact" class="nav-link <?= $contact ?>">
                                 <i class="nav-link-icon fa fa-database"> </i> ข้อเสนอแนะ
                             </a>
                         </li>
                         <li class="btn-group nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-edit"></i> สร้างกระทู้
+                            <a href="#" class="nav-link btn btn-primary text-light" id="create" data-toggle="modal" data-target="#editkatoo">
+                                <i class="nav-link-icon fa fa-edit text-light"></i> สร้างกระทู้
                             </a>
                         </li>
 
@@ -443,7 +461,7 @@ switch ($page) {
                         <ul class="vertical-nav-menu">
                             <li class="app-sidebar__heading">ดูภาพรวมของระบบ</li>
                             <li>
-                                <a href="index.php" class="<?=  $active1 ?>">
+                                <a href="index.php?page=1" class="<?= $active1 ?>">
                                     <i class="metismenu-icon pe-7s-rocket"></i> แสดงภาพรวม
                                 </a>
                             </li>
@@ -455,12 +473,12 @@ switch ($page) {
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="index.php?page=2" class="<?=  $active2 ?>">
+                                        <a href="index.php?page=2" class="<?= $active2 ?>">
                                             <i class="metismenu-icon"></i> จัดการประกาศสอน
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="index.php?page=3" class="<?=  $active3 ?>">
+                                        <a href="index.php?page=3" class="<?= $active3 ?>">
                                             <i class="metismenu-icon">
                                             </i>จัดการกระดานถาม-ตอบ
                                         </a>
@@ -470,8 +488,9 @@ switch ($page) {
                             </li>
 
                             <li>
-                                <a href="index.php?page=4" class="<?=  $active4 ?>">
-                                    <i class="metismenu-icon pe-7s-display2"></i> จัดการข้อมูลสมาชิก
+                                <a href="index.php?page=4" class="<?= $active4 ?>">
+                                    <i class="metismenu-icon pe-7s-id"></i> จัดการข้อมูลสมาชิก
+
                                 </a>
                             </li>
 
@@ -498,6 +517,9 @@ switch ($page) {
                                 break;
                             case 4:
                                 include "page4.php";
+                                break;
+                            case "contact":
+                                include "contact.php";
                                 break;
                             default:
                                 include "page1.php";
@@ -535,23 +557,15 @@ switch ($page) {
 
         </div>
     </div>
+
     <?php include "footer.php"; ?>
 </body>
 
 </html>
 <script>
-
-
     $(document).ready(function() {
-         /*Checkbox check list all*/
-      $("#checkAll").click(function() {
-            $(".check").prop('checked', $(this).prop('checked'));
-        });
 
-        function toggleOn() {
-            $('#inputStatus').bootstrapToggle('off')
 
-        }
         $('#datatable').DataTable({
             "scrollX": false,
             "columnDefs": [{}],
@@ -565,4 +579,96 @@ switch ($page) {
 
 
     });
+</script>
+<script>
+    $(document).ready(function() {
+        var x = $(location).attr('search');
+        if (x == "?page=1" || x == "?page=2" || x == "?page=4" || x == "?page=contact" || x == "") {
+            $('#create').addClass('hide');
+        }
+        console.log(x);
+
+        $("#btnSend").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "../function/register.php",
+                data: $("#register").serialize(),
+                success: function(result) {
+                    if (result.status == 1) // Success
+                    {
+                        confirm(result.message);
+
+                        $(".close").click();
+                    } else // Err
+                    {
+                        confirm(result.message);
+
+                    }
+                }
+            });
+
+        });
+        /*--------------------------------------------------------------------*/
+        $("#btnedit").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "../function/updatemember.php",
+                data: $("#register").serialize(),
+                success: function(result) {
+                    if (result.status == 1) // Success
+                    {
+                        confirm(result.message);
+                        $(".close").click();
+                    } else // Err
+                    {
+                        confirm(result.message);
+
+                    }
+                }
+            });
+
+        });
+        //---------------------------------------------------------------------------------
+        $("#btneditkatoo").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "../function/updatekatoo.php",
+                data: $("#katoo").serialize(),
+                success: function(result) {
+                    if (result.status == 1) // Success
+                    {
+                        confirm(result.message);
+                        $(".close").click();
+                    } else // Err
+                    {
+                        confirm(result.message);
+
+                    }
+                }
+            });
+
+        });
+//------------------------------------------------------------------------------------------------
+    });
+
+    $('body').on('click', '[data-toggle="modal"]', function() {
+        $($(this).data("target") + ' .modal-body').load($(this).data("remote"));
+    });
+    //---------------------------------------------------------------------------
+    $("#insert").on('click', function() {
+        $('#exampleModalScrollableTitle').text("เพิ่มสมาชิก");
+        $('#btnedit').addClass('hide');
+        $('#btnSend').removeClass('hide');
+        $('#level').addClass('hide');
+        $('#register')[0].reset();
+        $('#inputpassword').attr('readonly', false);
+    });
+    //-----------------------------------------------------------------------------
+    $("#create").on('click', function() {
+        $('#exampleModalScrollableTitle').text("เพิ่มกระทู้");
+        $('#btneditkatoo').addClass('hide');
+        $('#btnsentkatoo').removeClass('hide');
+        $('#katoo')[0].reset();
+    });
+
 </script>

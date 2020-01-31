@@ -1,4 +1,4 @@
-<?php $navbar =array("","","","active"); ?>
+<?php $navbar =array("","","","active"," "); ?>
 
 <!DOCTYPE html>
 <html lang="en">

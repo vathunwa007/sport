@@ -1,15 +1,21 @@
 <style>
+.line{
+    width: 120px;
+    height: 5px;
+    background-color: #FFF
+}
 .navbar a:hover, .dropdown:hover .dropbtn {
 
-  background-image: url("https://www.pngitem.com/pimgs/m/4-42896_colorful-smoke-transparent-background-color-transparent-smoke-png.png");
+  background-image: url("https://cdn2.iconfinder.com/data/icons/activity-5/50/1F3C0-basketball-512.png");
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
-  color:white;
+  transition: all .5s;
 }
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
-    color: rgba(0,0,0,.9);
-    background-image: url(https://www.pngitem.com/pimgs/m/4-42896_colorful-smoke-transparent-background-color-transparent-smoke-png.png);
+    color: white;
+  text-shadow: 2px 2px 4px #000000;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDlbVzhSuj_rqeneW8NCxkc-h-mbBsbriTCDqKNkfUlXfw9LiJtw&s");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -28,19 +34,19 @@
         <ul class="navbar-nav mx-auto text-md-center text-left">
 
             <li class="nav-item <?php echo $navbar[0]; ?>">
-                <a class="nav-link" href="index.php">หน้าหลัก <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php"><i class="fas fa-home text-info"></i>หน้าหลัก <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <?php echo $navbar[1]; ?>">
-                <a class="nav-link" href="home1.php">ประกาศสอนกีฬา</a>
+                <a class="nav-link" href="home1.php"><i class="fas fa-running text-info"></i>ประกาศสอนกีฬา</a>
             </li>
             <li class="nav-item <?php echo $navbar[2]; ?>">
-                <a class="nav-link" href="home2.php">กระดานถาม-ตอบ</a>
+                <a class="nav-link" href="home2.php"><i class="fas fa-bullhorn text-info"></i>กระดานถาม-ตอบ</a>
             </li>
             <li class="nav-item <?php echo $navbar[3]; ?>">
-                <a class="nav-link" href="home3.php">เกี่ยวกับเรา</a>
+                <a class="nav-link" href="home3.php"><i class="fas fa-comment-dots text-info"></i>เกี่ยวกับเรา</a>
             </li>
             <li class="nav-item <?php echo $navbar[4]; ?>">
-                <a class="nav-link" href="home4.php">ติดต่อ</a>
+                <a class="nav-link" href="home4.php"><i class="fas fa-address-card text-info"></i>ติดต่อ</a>
             </li>
 
         </ul>

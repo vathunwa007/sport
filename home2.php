@@ -1,10 +1,10 @@
-<?php $navbar =array("","","active"); ?>
+<?php $navbar =array("","","active","",""); ?>
 <?php
 require_once "function/connect.php";
-$sql = "SELECT a.m_username,b.id,b.namekatoo,b.detailkatoo,b.datetime
+$sql = "SELECT a.m_username,b.id,b.namekatoo,b.detailkatoo,b.datetime,b.status
 FROM tb_member a
 INNER JOIN tb_katoo b
-ON a.m_id = b.idmember";
+ON a.m_id = b.idmember WHERE b.status = 1";
 $row = mysqli_query($con, $sql) or die(mysqli_error($con));
 $row_katoo = mysqli_fetch_assoc($row);
 $totalrow_katoo = mysqli_num_rows($row);
@@ -57,7 +57,7 @@ function gotokatoo(id){
   <?php } ?>
   </div>
   <div class="card-body">
-  <table class="table table-hover table-bordered">
+  <table class="table table-hover table-bordered" id="Datatable">
   <thead>
     <tr >
       <th scope="col">ลำดับ</th></th>
@@ -94,3 +94,21 @@ function gotokatoo(id){
 
 </body>
 </html>
+<script>
+    $(document).ready(function() {
+
+
+        $('#Datatable').DataTable({
+            "scrollX": false,
+            "columnDefs": [{}],
+
+            "bFilter": true,
+
+            "language": {
+                "url": "http://cdn.datatables.net/plug-ins/1.10.20/i18n/Thai.json"
+            }
+        });
+
+
+    });
+</script>
