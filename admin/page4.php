@@ -7,12 +7,12 @@ $totalrow_member = mysqli_num_rows($row);
 $num = 0;
 
 
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sqldelete ="DELETE FROM `tb_member` WHERE `tb_member`.`m_id`=$id";
-    mysqli_query($con,$sqldelete);
+    $sqldelete = "DELETE FROM `tb_member` WHERE `tb_member`.`m_id`=$id";
+    mysqli_query($con, $sqldelete);
     echo '<script>location.replace("index.php?page=4")</script>';
-  }
+}
 
 ?>
 <h2 class="">จัดการสมาชิก</h2>
@@ -178,25 +178,26 @@ if(isset($_GET['id'])){
         });
 
     }
-    function deletee(id){
-  swal({
-    title: "คุณต้องการที่จะลบสมาชิกผู้นี้??",
-    text: "กรุณาตรวจสอบความถูกต้องก่อนกดปุ่มตกลง!",
-    icon: "warning",
-    buttons: true,
-    dangerMode: true,
-  })
-  .then((willDelete) => {
-    if (willDelete) {
-      swal("ทำการลบเสร็จสมบูรณ์!", {
-        icon: "success",
 
-      });
-      location.replace("index.php?page=4&id="+id);
+    function deletee(id) {
+        swal({
+                title: "คุณต้องการที่จะลบสมาชิกผู้นี้??",
+                text: "กรุณาตรวจสอบความถูกต้องก่อนกดปุ่มตกลง!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("ทำการลบเสร็จสมบูรณ์!", {
+                        icon: "success",
 
-    } else {
-      swal("ยกเลิกรายการ!");
+                    });
+                    location.replace("index.php?page=4&id=" + id);
+
+                } else {
+                    swal("ยกเลิกรายการ!");
+                }
+            });
     }
-  });
-}
 </script>

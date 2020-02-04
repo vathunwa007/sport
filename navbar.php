@@ -74,7 +74,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" name="login" id="login" method="POST">
+                <form action="function/login.php" name="login" id="login" method="POST">
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
                         <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="กรุณากรอกชื่อผู้ใช้งาน">
@@ -87,9 +87,7 @@
 
             </div>
             <div class="modal-footer">
-            <a href="#" class="btn btn-info"data-toggle="modal" data-target="#modaladmin" style="margin-right: auto;">
-                                                <i class="fas fa-user-cog text-warning"></i>Admin
-                                            </a>
+
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2"><i class="fas fa-user-plus"></i>สมัครสมาชิก</button>
                 <button type="submit" class="btn btn-primary" id="buttonlogin"><i class="fas fa-sign-in-alt"></i>ล็อกอินเข้าสู่ระบบ</button>
                 </form>
@@ -124,7 +122,7 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="far fa-arrow-alt-circle-left"></i>ย้อนกลับ</button>
-                <button type="submit" class="btn btn-success" id="buttonlogin"><i class="fas fa-sign-in-alt"></i>ล็อกอินเข้าสู่ระบบแอดมิน</button>
+                <button type="submit" class="btn btn-success " id="buttonlogin"><i class="fas fa-sign-in-alt"></i>ล็อกอินเข้าสู่ระบบแอดมิน</button>
                 </form>
 
             </div>
@@ -219,7 +217,7 @@
     });
 </script>
 <script type="text/javascript">
-    $(function($) {
+ /*   $(function($) {
         $("#buttonlogin").click(function() {
             $.ajax({
                 type: "POST",
@@ -235,6 +233,16 @@
 
                         }).then((value) => {
                             location.reload();
+                        });
+                    }if (result.status == 2) // Success
+                    {
+                        swal({
+                            title: "เข้าสู่ระบบแอดมินสำเร็จ!",
+                            text: result.message,
+                            icon: "success",
+
+                        }).then((value) => {
+                            location.href("admin/index.php");
                         });
 
 
@@ -254,5 +262,5 @@
 
         });
 
-    });
+    });*/
 </script>

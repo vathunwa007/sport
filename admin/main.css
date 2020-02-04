@@ -11097,7 +11097,8 @@ button,
     flex: 1;
     flex-direction: column;
     display: flex;
-    z-index: 12
+    z-index: 12;
+    width: 100%;
 }
 
 .app-main .app-main__inner {

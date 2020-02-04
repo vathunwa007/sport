@@ -2,8 +2,9 @@
 session_start();
 if(session_destroy()){
 
- echo"<script>  window.history.back();
-  </script>";
+  header( "location: ../index.php" );
+  exit(0);
+
 }
 
 ?>

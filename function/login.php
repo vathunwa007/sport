@@ -30,16 +30,22 @@ if($result ->num_rows == 1){
 
  mysqli_close($con);
 
- if($_SESSION['level'] != 1){
-
-    echo json_encode(array('status' => '1','message'=> 'login add successfully'));
+ if($_SESSION['level'] == 0){
+   header( "location: ../index.php?success" );
+   exit(0);
+    //echo json_encode(array('status' => 1,'message'=> 'login add successfully'));
 
  }else{
-    echo json_encode(array('status' => '1','message'=> 'loginadmin add successfully'));
+      header( "location: ../admin/index.php?success" );
+      exit(0);
+    //echo json_encode(array('status' => 2,'message'=> 'loginadmin add successfully'));
+
 
  }
 }else{
-    echo json_encode(array('status' => '0','message'=> 'Error login!'));
+   header( "location: ../index.php" );
+   exit(0);
+    //echo json_encode(array('status' => '0','message'=> 'Error login!'));
 }
 
 ?>

@@ -518,6 +518,9 @@ switch ($page) {
                             case 4:
                                 include "page4.php";
                                 break;
+                                case "showpost":
+                                    include "showpost.php";
+                                    break;
                             case "contact":
                                 include "contact.php";
                                 break;
@@ -563,6 +566,8 @@ switch ($page) {
 
 </html>
 <script>
+$('#imgid0').addClass('active');
+
     $(document).ready(function() {
 
 
@@ -648,7 +653,7 @@ switch ($page) {
             });
 
         });
-//------------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------------
     });
 
     $('body').on('click', '[data-toggle="modal"]', function() {
@@ -671,4 +676,28 @@ switch ($page) {
         $('#katoo')[0].reset();
     });
 
+    function loadpost(id) {
+
+        $.ajax({
+            url: '../detail.php?id=' + id,
+            dataType: 'html',
+            success: function(html) {
+                var div = $('.card', $(html)).addClass('done');
+                $('#showpost').html(div);
+
+            }
+        });
+    }
 </script>
+<?php
+if (isset($_REQUEST['success'])) {
+    echo '<script> swal({
+    title: "เข้าสู่ระบบแอดมินสำเร็จ!",
+    text: "ทำการล็อกอินเข้าสู่ระบบสำเร็จ",
+    icon: "success",
+
+}).then((value) => {
+
+});</script>';
+}
+?>

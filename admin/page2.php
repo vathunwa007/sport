@@ -20,6 +20,7 @@ if(isset($_GET['id'])){
   echo '<script>location.replace("index.php?page=2")</script>';
 }
 
+
 ?>
 
   <h2 class="">จัดการประกาศสอน</h2>
@@ -39,7 +40,7 @@ if(isset($_GET['id'])){
     <h5 class="card-title">ชื่อผู้สอน :<?php echo $showpost['m_username']; ?></h5>
     <p class="card-text">ประเภทกีฬา :<?php echo $showpost['namesport']; ?></p>
     <p class="card-text">เขตพื้นที่ :<?php echo $showpost['amphur']; ?></p>
-    <a href="detail.php?id=<?php echo $showpost['id']; ?>" class="btn btn-info btn-block"><i class="fas fa-comment text-warning"></i>ดูรายละเอียดผู้สอน</button></a>
+    <a href="index.php?page=showpost&id=<?php echo $showpost['id']; ?>" class="btn btn-info btn-block"><i class="fas fa-comment text-warning"></i>ดูรายละเอียดผู้สอน</a>
 
   </div>
   <footer class="blockquote-footer" style="font-size: 14px;">อัพเดทล่าสุด <?php echo $showpost['datetime']; ?></footer>
@@ -55,6 +56,21 @@ if(isset($_GET['id'])){
     </div>
 </div>
 
+<!--------------------------------------------------------------------------------------------------->
+<div class="modal fade mt-5" id="loadpost" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+               <div class="showpost">
+
+               </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
 <!----------------------------------------------------------------------------------------------->
 <script>
 function deletee(id){
@@ -78,4 +94,5 @@ function deletee(id){
     }
   });
 }
+
 </script>

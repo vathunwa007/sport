@@ -25,6 +25,7 @@ $f=fopen("counter.txt","w");
 fputs($f,$data);
 fclose($f);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,3 +88,15 @@ fclose($f);
 </body>
 
 </html>
+<?php
+if(isset($_REQUEST['success'])){
+  echo '<script> swal({
+    title: "เข้าสู่ระบบสำเร็จ!",
+    text: "ทำการล็อกอินเข้าสู่ระบบสำเร็จ",
+    icon: "success",
+
+}).then((value) => {
+
+});</script>';
+}
+?>

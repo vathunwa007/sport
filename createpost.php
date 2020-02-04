@@ -38,7 +38,7 @@ $aria = array("คลองสาน", "คลองเตย", "จอมทอ
                     </div>
                     <form action="function/insertpost.php" name="insertpost" id="insertpost" method="POST" enctype="multipart/form-data">
                         <div class="card-body col-6 mx-auto">
-                            <div class="form-group hide">
+                            <div class="form-group">
                                 <label for="exampleFormControlInput1">ชื่อ-นามสกุล</label>
                                 <input type="text" class="form-control" name="name" placeholder="กรุณาใส่ชื่อ-นามสกุล" required>
                             </div>
@@ -83,19 +83,19 @@ $aria = array("คลองสาน", "คลองเตย", "จอมทอ
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                             <div class="custom-file hide" id="addrow2">
-                                <input type="file" class="custom-file-input" name="fileToUpload[]" id="fileToUpload"accept=".jpg,.jpeg,.png" aria-describedby="inputGroupFileAddon01" multiple>
+                                <input type="file" class="custom-file-input" name="fileToUpload[]" id="fileToUpload2"accept=".jpg,.jpeg,.png" aria-describedby="inputGroupFileAddon01" multiple>
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                             <div class="custom-file hide" id="addrow3">
-                                <input type="file" class="custom-file-input" name="fileToUpload[]" id="fileToUpload"accept=".jpg,.jpeg,.png" aria-describedby="inputGroupFileAddon01" multiple>
+                                <input type="file" class="custom-file-input" name="fileToUpload[]" id="fileToUpload3"accept=".jpg,.jpeg,.png" aria-describedby="inputGroupFileAddon01" multiple>
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                             <div class="custom-file hide" id="addrow4">
-                                <input type="file" class="custom-file-input" name="fileToUpload[]" id="fileToUpload"accept=".jpg,.jpeg,.png" aria-describedby="inputGroupFileAddon01" multiple>
+                                <input type="file" class="custom-file-input" name="fileToUpload[]" id="fileToUpload4"accept=".jpg,.jpeg,.png" aria-describedby="inputGroupFileAddon01" multiple>
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                             <div class="custom-file hide" id="addrow5">
-                                <input type="file" class="custom-file-input" name="fileToUpload[]" id="fileToUpload"accept=".jpg,.jpeg,.png" aria-describedby="inputGroupFileAddon01" multiple>
+                                <input type="file" class="custom-file-input" name="fileToUpload[]" id="fileToUpload5"accept=".jpg,.jpeg,.png" aria-describedby="inputGroupFileAddon01" multiple>
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                             <button type="button"class="btn btn-warning btn-block btn-sm" id="addrowfile">เพิ่มรูปภาพ</button>
@@ -122,6 +122,34 @@ $aria = array("คลองสาน", "คลองเตย", "จอมทอ
 $(document).ready(function(){
     var row = 2;
     $('#fileToUpload').on('change', function() {
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+
+    });
+    $('#fileToUpload2').on('change', function() {
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+
+    });
+    $('#fileToUpload3').on('change', function() {
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+
+    });
+    $('#fileToUpload4').on('change', function() {
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+
+    });
+    $('#fileToUpload5').on('change', function() {
         //get the file name
         var fileName = $(this).val();
         //replace the "Choose a file" label

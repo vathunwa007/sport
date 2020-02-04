@@ -8,6 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <?php include "head.php"; ?>
+    <script>
+function showalert(message) {
+  swal({
+                        title: message,
+                        text: "กรุณากดที่ปุ่มตกลงเพื่อดำเนินการต่อ",
+                        icon: "success",
+                    });
+  }
+</script>
     <style>
 
   body, html {
@@ -38,13 +47,12 @@
 
 /* Position text in the middle of the page/image */
 .bg-text {
-  background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
   border: 3px solid #f1f1f1;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -53,7 +61,10 @@
   text-align: center;
 }
 
+
     </style>
+
+
 </head>
 <body>
     <?php include "navbar.php"; ?>
@@ -67,36 +78,29 @@
       </div>
     </div>
 
-    <div class="card  pt-4" style="background-color: rgba(245, 245, 245, 1);
+    <div class="card  pt-4" style=" background-color: rgba(0,0,0, 0);
   opacity: .90;">
       <div class="col-6 mx-auto">
-        <form>
+        <form action="#" method="POST" id="formcontact">
           <div class="row">
-            <div class="col-12 col-md" >
-              <input type="text" class="form-control" placeholder="ชื่อของคุณ">
+            <div class="col-12 col-md-4" >
+              <input type="text" class="form-control" placeholder="ชื่อของคุณ" name="name" id="name">
             </div>
-            <div class="col-12 col-md mt-4 mt-md-0">
-              <input type="text" class="form-control" placeholder="อีเมลของคุณ">
+            <div class="col-12 col-md-4 mt-4 mt-md-0">
+              <input type="email" class="form-control" placeholder="อีเมลของคุณ" name="email" id="email">
             </div>
-            <div class="col-12 col-md mt-4 mt-md-0">
-              <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อกลับได้">
-            </div>
-          </div>
-
-          <div class="row mt-4">
-            <div class="col">
-              <input type="email" class="form-control" placeholder="หัวข้อที่แจ้งเรื่อง">
+            <div class="col-12 col-md-4 mt-4 mt-md-0">
+              <input type="telephone" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อกลับได้" name="tellephone" id="telephone">
             </div>
           </div>
-
           <div class="row mt-4">
             <div class="col">
-              <textarea class="form-control" name="message" rows="3" placeholder="เขียนปัญหาของคุณลงที่นี้?"></textarea>
+              <textarea  class="form-control" name="message"id="message" rows="3" placeholder="เขียนปัญหาของคุณลงที่นี้?"></textarea>
             </div>
           </div>
           <div class="row mt-4">
             <div class="col text-center">
-              <button type="submit" class="btn btn-primary btn-block">ส่งแบบฟอร์ม</button>
+              <button type="button" id="sentcontact"class="btn btn-primary btn-block">ส่งแบบฟอร์ม</button>
             </div>
           </div>
         </form>
@@ -104,5 +108,36 @@
     </div>
   </div>
 </section>
+<?php include "footer.php"; ?>
+
 </body>
 </html>
+<script>
+
+
+ $("#sentcontact").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "function/savecontact.php",
+                data: $("#formcontact").serialize(),
+                complete: function(data) {
+                  swal({
+                        title: "ทำการส่งข้อความติดต่อสำเร็จ",
+                        text: "กรุณากดที่ปุ่มตกลงเพื่อดำเนินการต่อ",
+                        icon: "success",
+                    });
+
+                },
+                error: function(error){
+                  swal({
+                        title: "เกิดข้อผิดพลาดกรุณาลองใหม่!!",
+                        text: "กรุณากดที่ปุ่มตกลงเพื่อดำเนินการต่อ",
+                        icon: "danger",
+                    });
+
+                }
+            });
+
+        });
+
+</script>

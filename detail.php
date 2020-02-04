@@ -33,7 +33,7 @@ $totalimage2 = mysqli_num_rows($imagequery2);
 <?php include "navbar.php"; ?>
 
     <div class="container">
-        <div style="  box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.3), 0 20px 30px 0 rgba(0, 0, 0, 0.19);">
+        <div style="box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.3), 0 20px 30px 0 rgba(0, 0, 0, 0.19);">
             <div class="card" style="margin-top:20px;">
                 <div class="card-header">
                     ข้อมูลรายละเอียด
