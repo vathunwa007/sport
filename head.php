@@ -13,9 +13,32 @@ body{
     font-family: 'Taviraj', serif;
    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
    margin-top: 100px;
+   margin-bottom: 100px;
 }
 a{
     font-size: 18px;
 }
+.footer{
+display: flex;
+justify-content: space-between;
 
+position: fixed;
+bottom: 0%;
+background-color: white;
+width: 100%;
+padding: 1% 0.5% 0;
+z-index: 99;
+opacity: 90%;
+}
+#showcomment{
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ffc107;
+    transition:   ease-in-out;
+}
+#showcomment:hover{
+    border-width: 5px;
+    border-style: solid;
+    border-color: white;
+}
 </style>

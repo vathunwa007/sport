@@ -38,23 +38,25 @@ function gotokatoo(id){
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="https://images.unsplash.com/photo-1499363145340-41a1b6ed3630?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="First slide" height="250">
+      <img class="d-block w-100" src="https://media-exp1.licdn.com/dms/image/C561BAQGC1UWGVRjVcw/company-background_10000/0?e=2159024400&v=beta&t=Ig3VjUHzsN5NVPkl0ujvVmIGjfkL_SLP7WuS14e0Bl0" alt="First slide" height="350">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="https://images.unsplash.com/photo-1523800378286-dae1f0dae656?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=969&q=80" alt="Second slide" height="250">
+      <img class="d-block w-100" src="https://coverfiles.alphacoders.com/650/65076.jpg" alt="Second slide" height="350">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="https://images.unsplash.com/photo-1523800378286-dae1f0dae656?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=969&q=80" alt="Third slide" height="250">
+      <img class="d-block w-100" src="https://coverfiles.alphacoders.com/699/69908.jpg" alt="Third slide" height="350">
     </div>
   </div>
 </div>
 <div class="card" style="margin-top:25px;">
   <div class="card-header">
+
   <?php if(isset($_SESSION['id']) != null){ ?>
   <button onclick="window.location.href ='createkatoo.php';"class="btn btn-info float-right" style="display: inline;">ตั้งกระทู้<img src="https://img.icons8.com/dusk/30/000000/communication.png"></button>
   <?php }else{ ?>
       <p style="display: inline;color:red;">กรุณาลงชื่อเข้าใช้งานก่อนตั้งกระทู้</p>
   <?php } ?>
+  <h3 class="text-center">กระดานถาม-ตอบ</h3>
   </div>
   <div class="card-body">
   <table class="table table-hover table-bordered" id="Datatable">

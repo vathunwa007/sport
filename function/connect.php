@@ -1,16 +1,16 @@
 <?php
-/*
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "sport";
-*/
 
 $servername = "remotemysql.com";
 $username = "aidjH2XmVe";
 $password = "NdnxhUdg5N";
 $dbname = "aidjH2XmVe";
 
+/*
+$servername = "remotemysql.com";
+$username = "aidjH2XmVe";
+$password = "NdnxhUdg5N";
+$dbname = "aidjH2XmVe";
+*/
 // Create connection
 $con = new mysqli($servername, $username, $password, $dbname);
 // Check connection

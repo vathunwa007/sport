@@ -65,8 +65,6 @@ $totalimage2 = mysqli_num_rows($imagequery2);
                             <p>สถาณที่เปิดสอน : <?php  echo $showpost['location']; ?></p>
                             <p>เบอร์โทรศัพท์ : <?php  echo $showpost['telephone']; ?></p>
                             <p>อีเมล์ : <?php  echo $showpost['email']; ?></p>
-
-
                         </div>
                     </div>
                 </div>

@@ -50,21 +50,21 @@ fclose($f);
                 <img src="https://cdn.pixabay.com/photo/2012/11/28/11/11/quarterback-67701_1280.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
         <h5>เข้าสู่หน้าเว็บหลัก</h5>
-        <a href="home1.php" class="btn btn-primary">GOTOHOMEPAGE</a>
+        <a href="home1.php" class="btn btn-primary btn-lg">ไปหน้าประกาศสอน</a>
       </div>
                 </div>
                 <div class="carousel-item">
                     <img src="https://cdn.pixabay.com/photo/2015/03/01/22/27/relay-race-655353_1280.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
         <h5>เข้าสู่หน้าเว็บหลัก</h5>
-        <a href="home1.php" class="btn btn-primary">GOTOHOMEPAGE</a>
+        <a href="home1.php" class="btn btn-primary btn-lg">ไปหน้าประกาศสอน</a>
       </div>
                 </div>
                 <div class="carousel-item">
                     <img src="https://cdn.pixabay.com/photo/2014/10/22/17/25/stretching-498256_1280.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
         <h5>เข้าสู่หน้าเว็บหลัก</h5>
-        <a href="home1.php" class="btn btn-primary">GOTOHOMEPAGE</a>
+        <a href="home1.php" class="btn btn-primary btn-lg">ไปหน้าประกาศสอน</a>
       </div>
                 </div>
             </div>
@@ -82,9 +82,9 @@ fclose($f);
 
 
     </div>
+    </div>
 
     <?php include "footer.php"; ?>
-    </div>
 </body>
 
 </html>

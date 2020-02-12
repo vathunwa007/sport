@@ -36,7 +36,7 @@ if($result ->num_rows == 1){
     //echo json_encode(array('status' => 1,'message'=> 'login add successfully'));
 
  }else{
-      header( "location: ../admin/index.php?success" );
+      header( "location: ../admin/index.php?page=1&success" );
       exit(0);
     //echo json_encode(array('status' => 2,'message'=> 'loginadmin add successfully'));
 

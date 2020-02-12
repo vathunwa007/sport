@@ -1,13 +1,15 @@
 <?php $navbar = array("", "active","","","");
 error_reporting(0);
-$search = $_POST['search'];
+$searchamphur = $_POST['searchamphur'];
+$searchsport = $_POST['searchsport'];
+$sport = array("การยิงธนู", "กรีฑา", "แบดมินตัน", "กีฬาเบสบอล", "บาสเกตบอล", "หาดวอลเลย์บอล", "มวย", "เรือแคนู / พื้นน้ำเรียบเรือคายัค", "เรือแคนู / เรือคายัคสลาลม", "BMX ขี่จักรยาน", "ขี่จักรยานเสือภูเขา", "จักรยานถนน", "ติดตามการปั่นจักรยาน", "การดำน้ำ", "นักขี่ม้า", "การเล่นฟันดาบ", "ฟุตบอล", "ยิมนาสติกสากล", "ยิมนาสติกเข้าจังหวะ", "แทรมโพลี", "แฮนด์บอล", "ฮอกกี้", "ยูโด", "ปัญจกรีฑาสมัยใหม่", "การโยกย้าย", "การแล่นเรือ", "การยิง", "ซอฟท์บอล", "ว่ายน้ำ", "Synchronized ว่ายน้ำ", "เทเบิลเทนนิส", "เทควันโดทำ", "เทนนิส", "ไตรกีฬา", "วอลเลย์บอล", "น้ำโปโล", "ยกน้ำหนัก", "มวยปล้ำ");
 $aria = array("คลองสาน", "คลองเตย", "จอมทอง", "จตุจักร", "ดุสิต", "ดอนเมือง", "ตลิ่งชัน", "ธนบุรี", "บางกอกน้อย", "บางกอกใหญ่", "บางกะปิ", "บางขุนเทียน", "บางเขน", "บางคอแหลม", "บางซื่อ", "บางพลัด", "บางรัก", "บึงกุ่ม", "ประเวศ", "ปทุมวัน", "ป้อมปราบศัตรูพ่าย", "พญาไท", "พระโขนง", "พระนคร", "ภาษีเจริญ", "มีนบุรี", "ยานนาวา", "ราชเทวี", "ราษฎร์บูรณะ", "ลาดกระบัง", "ลาดพร้าว", "สาทร", "สัมพันธวงศ์", "หนองแขม", "หนองจอก", "ห้วยขวาง", "สวนหลวง", "ดินแดง", "หลักสี่", "สายไหม", "คันนายาว", "สะพานสูง", "วังทองหลาง", "คลองสามวา", "วัฒนา", "บางนา", "ทวีวัฒนา", "บางแค", "ทุ่งครุ", "บางบอน");
 require_once "function/connect.php";
 $sql = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
 ON a.idmember = b.m_id ";
-if (isset($_POST['search'])) {
+if (isset($_POST['searchamphur'])) {
     $sql = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
-ON a.idmember = b.m_id WHERE amphur = '$search' ";
+ON a.idmember = b.m_id WHERE amphur = '$searchamphur' OR namesport = '$searchsport'";
 }
 $query = mysqli_query($con, $sql) or die(mysqli_error($con));
 $showpost = mysqli_fetch_array($query);
@@ -38,10 +40,26 @@ $total = mysqli_num_rows($query);
                 <div class="clearfix">
                     <?php if (isset($_SESSION['id']) != null) { ?> <button onclick="window.location.href ='createpost.php';" class="btn btn-danger">ลงประกาศสอน<img src="https://img.icons8.com/bubbles/30/000000/commercial.png"></button> <?php } ?>
                     <form class="form-inline float-right" action="home1.php" method="POST">
+                    <p class="form-group">เลือกรูปแบบกีฬา</p>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <select class="form-control" name="searchsport">
+                                <?php if(isset($searchsport)){
+                                echo "<option>$searchsport</option>";
+                                }else{
+                                echo "<option>เลือกกีฬา</option>";
+                                } ?>
+                                <?php foreach ($sport as $value) {
+                                    echo "<option>$value</option>";
+                                } ?>
+                            </select>
                         <p class="form-group">เลือกเขตพื้นที่</p>
                         <div class="form-group mx-sm-3 mb-2">
-                            <select class="form-control" name="search">
-                                <option>เลือกทั้งหมด</option>
+                            <select class="form-control" name="searchamphur">
+                            <?php if(isset($searchamphur)){
+                                echo "<option>$searchamphur</option>";
+                                }else{
+                                echo "<option>เลือกทั้งหมด</option>";
+                                } ?>
                                 <?php foreach ($aria as $value) {
                                     echo "<option>$value</option>";
                                 } ?>
@@ -64,9 +82,9 @@ $total = mysqli_num_rows($query);
 <img class="card-img-top" src="./img/<?php echo $showpost['image']; ?>" alt="Card image cap"height="300">
 
   <div class="card-body">
-    <h5 class="card-title">ชื่อผู้สอน :<?php echo $showpost['m_username']; ?></h5>
-    <p class="card-text">ประเภทกีฬา :<?php echo $showpost['namesport']; ?></p>
-    <p class="card-text">เขตพื้นที่ :<?php echo $showpost['amphur']; ?></p>
+    <p class="card-title"><strong> ชื่อผู้สอน :</strong><?php echo $showpost['m_username']; ?></p>
+    <p class="card-text"><strong>ประเภทกีฬา :</strong><?php echo $showpost['namesport']; ?></p>
+    <p class="card-text"><strong>เขตพื้นที่ :</strong><?php echo $showpost['amphur']; ?></p>
     <a href="detail.php?id=<?php echo $showpost['id']; ?>" class="btn btn-info btn-block"><i class="fas fa-comment text-light"></i>ดูรายละเอียดผู้สอน</button></a>
 
   </div>

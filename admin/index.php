@@ -119,10 +119,9 @@ switch ($page) {
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">User Account</button>
                                             <button type="button" tabindex="0" class="dropdown-item">Settings</button>
                                             <h6 tabindex="-1" class="dropdown-header">-------------------</h6>
-                                            <button type="button" tabindex="0" class="dropdown-item">Logout</button>
+                                            <a href="../function/logout.php" tabindex="0" class="dropdown-item">Logout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -505,6 +504,9 @@ switch ($page) {
                     <!-----------สำหรับแสดงข้อมูลแต่ละหน้า------------------------------------------------->
                     <div class="showinner">
                         <?php
+                        if(isset($_GET['page']) != true){
+                            include "page1.php";
+                        }else{
                         switch ($page) {
                             case 1:
                                 include "page1.php";
@@ -518,15 +520,18 @@ switch ($page) {
                             case 4:
                                 include "page4.php";
                                 break;
-                                case "showpost":
-                                    include "showpost.php";
-                                    break;
+                            case 'showpost':
+                                include "showpost.php";
+                                break;
                             case "contact":
                                 include "contact.php";
                                 break;
                             default:
                                 include "page1.php";
+                                break;
                         }
+
+                    }
                         ?>
 
                     </div>
@@ -566,7 +571,7 @@ switch ($page) {
 
 </html>
 <script>
-$('#imgid0').addClass('active');
+    $('#imgid0').addClass('active');
 
     $(document).ready(function() {
 
@@ -587,8 +592,10 @@ $('#imgid0').addClass('active');
 </script>
 <script>
     $(document).ready(function() {
-        var x = $(location).attr('search');
-        if (x == "?page=1" || x == "?page=2" || x == "?page=4" || x == "?page=contact" || x == "") {
+        var urlParams = new URLSearchParams(window.location.search);
+        var page = urlParams.get('page');
+
+        if(page != 3){
             $('#create').addClass('hide');
         }
         console.log(x);

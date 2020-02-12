@@ -53,7 +53,7 @@ $aria = array("คลองสาน", "คลองเตย", "จอมทอ
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">ผลงาน</label>
+                                <label for="exampleFormControlTextarea1">รายละเอียดการสอน</label>
                                 <textarea class="form-control" name="work" rows="3"></textarea>
                             </div>
                             <div class="form-group">
