@@ -1,6 +1,6 @@
 
 <div class="footer">
-    <p class="mt-2">@COPYRIGTH BY TANATHIP</p><p><img src="https://download.seaicons.com/download/i54037/danleech/simple/danleech-simple-facebook.ico" alt="" width="25"><a href="facebook.com">thanathip</a><img src="https://cdn.icon-icons.com/icons2/2037/PNG/512/ig_instagram_media_social_icon_124260.png" alt=""width="25"><a href="instragram.com">IG:tanathip</a></p>
+    <p class="mt-2">@COPYRIGTH BY TANATHIP</p><p><img src="https://download.seaicons.com/download/i54037/danleech/simple/danleech-simple-facebook.ico" alt="" width="25"><a href="https://www.facebook.com/thanathipno8">thanathip</a><img src="https://cdn.icon-icons.com/icons2/2037/PNG/512/ig_instagram_media_social_icon_124260.png" alt=""width="25"><a href="https://www.instragram.com">IG:tanathip</a></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

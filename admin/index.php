@@ -1,4 +1,12 @@
 <?php
+session_start();
+include '../function/connect.php';
+$sqlprofile = "SELECT * FROM `tb_member` WHERE m_id = $_SESSION[id]";
+$queryprofile = mysqli_query($con,$sqlprofile);
+$row_profile = mysqli_fetch_array($queryprofile);
+?>
+
+<?php
 require_once "../function/connect.php";
 $page = (!isset($_GET['page'])) ? 0 : $_GET['page'];
 
@@ -52,7 +60,6 @@ switch ($page) {
 </head>
 
 <body>
-
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -115,11 +122,11 @@ switch ($page) {
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="https://scontent.fbkk5-3.fna.fbcdn.net/v/t1.0-9/45641907_1880315065371463_5594112482617589760_n.jpg?_nc_cat=105&_nc_ohc=KJcWQ5RIrJEAX9wvQUT&_nc_ht=scontent.fbkk5-3.fna&oh=c73fee546e05dc6b78d6158fdee5d1ec&oe=5E978CD2" alt="">
+                                            <img width="42" class="rounded-circle" src="../img/<?php echo $row_profile['imageprofile']; ?>" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">Settings</button>
+                                            <button type="button" tabindex="0" class="dropdown-item" data-toggle="modal" data-target="#profile" title="แก้ไขโปรไฟล์">Settings</button>
                                             <h6 tabindex="-1" class="dropdown-header">-------------------</h6>
                                             <a href="../function/logout.php" tabindex="0" class="dropdown-item">Logout</a>
                                         </div>
@@ -567,6 +574,63 @@ switch ($page) {
     </div>
 
     <?php include "footer.php"; ?>
+     <!-- Modalprofile-->
+<div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="profile" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profile">แก้ไขข้อมูลส่วนตัวแอดมิน</h5>
+                <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="../function/updateprofile.php" name="profile" id="profile" method="POST">
+                    <div class="form-group">
+                        <div class="card" style="width: 100%;">
+                            <img src="../img/<?php echo $row_profile['imageprofile']; ?>" id="imgprofile" name="imgprofile" class="card-img-top" alt="..." style="border-radius: 50%; width:250px; height:250px; margin: 0 auto;">
+                            <div class="card-body">
+                                <p class="card-text text-warning">เปลี่ยนรูปภาพ.</p>
+                                <input type='file' id="imgInp" name="imgInp" accept=".jpg,.jpeg,.png">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
+                        <input type="text" class="form-control" name="username2" id="username2"placeholder="กรุณากรอกชื่อผู้ใช้งาน" value="<?php echo $row_profile['m_username']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">รหัสผ่าน</label>
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="รหัสผ่านของคุณ" value="<?php echo $row_profile['m_password']; ?>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อ-นามสกุล</label>
+                        <input type="text" class="form-control" name="name2" id="name2"placeholder="กรุณากรอก ชื่อ-นามสกุล" value="<?php echo $row_profile['m_name']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">อีเมล์</label>
+                        <input type="email" class="form-control" name="email2" id="email2"placeholder="กรุณากรอก อีเมล" value="<?php echo $row_profile['m_email']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">เบอร์โทรศัพท์</label>
+                        <input type="text" class="form-control" name="telephone2" id="telephone2"placeholder="กรุณากรอก เบอร์โทรศัพท์" value="<?php echo $row_profile['m_telephone']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">ที่อยู่</label>
+                        <textarea class="form-control" id="address2" rows="3" name="address2"><?php echo $row_profile['m_address']; ?></textarea>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary  btn-block" name="btn-updateprofile" id="btn-updateprofile" value="บันทึก">
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 
 </html>
@@ -696,6 +760,23 @@ switch ($page) {
         });
     }
 </script>
+<script type="text/javascript">
+ function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#imgprofile').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgInp").change(function() {
+  readURL(this);
+});
+</script>
 <?php
 if (isset($_REQUEST['success'])) {
     echo '<script> swal({
@@ -706,5 +787,20 @@ if (isset($_REQUEST['success'])) {
 }).then((value) => {
 
 });</script>';
+}
+?>
+<?php
+if(isset($_REQUEST['updateprofile'])){
+    echo "<script> swal({
+        title: 'บันทึกการแก้ไขเรียบร้อย!',
+        text: 'ทำการบันทึกสำเร็จ',
+        icon: 'success',
+    });</script>";
+}else if(isset($_REQUEST['updateprofileeror'])){
+    echo "<script> swal({
+        title: 'ไม่สามารถบันทึกการแก้ไขได้!',
+        text: 'เกิดข้อผิดพลาด',
+        icon: 'success',
+    });</script>";
 }
 ?>

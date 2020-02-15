@@ -117,9 +117,9 @@
               <img alt="image" class="img-fluid" src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.0-9/45641907_1880315065371463_5594112482617589760_n.jpg?_nc_cat=105&_nc_ohc=0Q-Smhmpd7sAX-U8q8P&_nc_ht=scontent.fbkk22-2.fna&oh=664c9d7743b931bf644868505be87f81&oe=5EBF19D2">
             </div>
             <div class="col-12 col-md-6 col-lg-5 ml-auto  mt-5">
-            <h3> รหัส นักศึกษา 5911535456 </h3>
-            <h2>นาย Thanathip Ketsamrong</h2>
-              <p class="lead">มหาวิทยาลัยราชภัฏพระนคร คณะวิทยาศาสตร์ </p>
+            <h3> รหัส นักศึกษา 5910122113003 </h3>
+            <h2>นาย ธนาธิป เกตุสำโรง </h2>
+              <p class="lead">มหาวิทยาลัยราชภัฏพระนคร คณะวิทยาศาสตร์และเทคโนโลยี </p>
               <p class="lead">สาขา เทคโนโลยีสารสนเทศ ปีการศึกษา 2563</p>
             </div>
           </div>

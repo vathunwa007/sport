@@ -1,9 +1,9 @@
 <?php
 
-$servername = "remotemysql.com";
-$username = "aidjH2XmVe";
-$password = "NdnxhUdg5N";
-$dbname = "aidjH2XmVe";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sport";
 
 /*
 $servername = "remotemysql.com";

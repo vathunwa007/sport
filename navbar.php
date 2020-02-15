@@ -1,28 +1,52 @@
+<?php
+if(isset($_REQUEST['updateprofile'])){
+    echo "<script> swal({
+        title: 'บันทึกการแก้ไขเรียบร้อย!',
+        text: 'ทำการบันทึกสำเร็จ',
+        icon: 'success',
+    });</script>";
+}else if(isset($_REQUEST['updateprofileeror'])){
+    echo "<script> swal({
+        title: 'ไม่สามารถบันทึกการแก้ไขได้!',
+        text: 'เกิดข้อผิดพลาด',
+        icon: 'success',
+    });</script>";
+}
+?>
 <style>
-.line{
-    width: 120px;
-    height: 5px;
-    background-color: #FFF
-}
-.navbar a:hover, .dropdown:hover .dropbtn {
+    .line {
+        width: 120px;
+        height: 5px;
+        background-color: #FFF
+    }
 
-  background-image: url("https://cdn2.iconfinder.com/data/icons/activity-5/50/1F3C0-basketball-512.png");
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover;
-  transition: all .5s;
-}
-.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
-    color: white;
-  text-shadow: 2px 2px 4px #000000;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDlbVzhSuj_rqeneW8NCxkc-h-mbBsbriTCDqKNkfUlXfw9LiJtw&s");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.navbar-light .navbar-nav .nav-link {
-    color: rgb(0, 0, 0);
-}
+    .navbar a:hover,
+    .dropdown:hover .dropbtn {
+
+        background-image: url("https://cdn2.iconfinder.com/data/icons/activity-5/50/1F3C0-basketball-512.png");
+        background-position: center;
+        /* Center the image */
+        background-repeat: no-repeat;
+        /* Do not repeat the image */
+        background-size: cover;
+        transition: all .5s;
+    }
+
+    .navbar-light .navbar-nav .active>.nav-link,
+    .navbar-light .navbar-nav .nav-link.active,
+    .navbar-light .navbar-nav .nav-link.show,
+    .navbar-light .navbar-nav .show>.nav-link {
+        color: white;
+        text-shadow: 2px 2px 4px #000000;
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDlbVzhSuj_rqeneW8NCxkc-h-mbBsbriTCDqKNkfUlXfw9LiJtw&s");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+        color: rgb(0, 0, 0);
+    }
 </style>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #ebebeb;">
     <a class="navbar-brand" href="#"> <img src="http://pub-static.haozhaopian.net/assets/projects/pages/dca71680-c318-11e9-ae0a-0d283ef8239c_118a85ea-30d6-4f5d-8da4-896794ecf8b2_thumb.jpg" width="150" height="60" class="d-inline-block align-top" alt="">
@@ -51,15 +75,15 @@
 
         </ul>
         <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
-            <?php if(isset($_SESSION['id'])!= null){ ?>
+            <?php if (isset($_SESSION['id']) != null) { ?>
                 <li class="nav-item">
-                <a class="nav-link" href="function/logout.php">ออกจากระบบ<img src="https://img.icons8.com/flat_round/40/000000/shutdown--v1.png"></a>
+                    <a class="nav-link" href="function/logout.php">ออกจากระบบ<img src="https://img.icons8.com/flat_round/40/000000/shutdown--v1.png"></a>
                 </li>
-            <?php }else{ ?>
+            <?php } else { ?>
                 <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">เข้าสู่ระบบ<img src="https://img.icons8.com/bubbles/50/000000/lock.png"></a>
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">เข้าสู่ระบบ<img src="https://img.icons8.com/bubbles/50/000000/lock.png"></a>
                 </li>
-           <?php } ?>
+            <?php } ?>
         </ul>
     </div>
 </nav>
@@ -77,7 +101,7 @@
                 <form action="function/login.php" name="login" id="login" method="POST">
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
-                        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="กรุณากรอกชื่อผู้ใช้งาน">
+                        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  placeholder="กรุณากรอกชื่อผู้ใช้งาน">
                         <small id="emailHelp" class="form-text text-muted">กรุณาใส่ชื่อผู้ใช้งานหากยังไม่มีกดที่ปุ่มสมัครสมาชิก.</small>
                     </div>
                     <div class="form-group">
@@ -129,8 +153,8 @@
         </div>
     </div>
 </div>
-<!----------------------------------------------------------------->
-<!-- Modal2 -->
+<!-------------------------------register---------------------------------->
+
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -178,6 +202,73 @@
         </div>
     </div>
 </div>
+<?php
+include 'function/connect.php';
+$sqlprofile = "SELECT * FROM `tb_member` WHERE m_id = $_SESSION[id]";
+$queryprofile = mysqli_query($con,$sqlprofile);
+$row_profile = mysqli_fetch_array($queryprofile);
+?>
+<!-- Modalprofile-->
+<div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="profile" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profile">แก้ไขข้อมูลส่วนตัว</h5>
+                <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="function/updateprofile.php" name="profile" id="profile" method="POST">
+                    <div class="form-group">
+                        <div class="card" style="width: 100%;">
+                            <img src="img/<?php echo $row_profile['imageprofile']; ?>" id="imgprofile" name="imgprofile" class="card-img-top" alt="..." style="border-radius: 50%; width:250px; height:250px; margin: 0 auto;">
+                            <div class="card-body">
+                                <p class="card-text text-warning">เปลี่ยนรูปภาพ.</p>
+                                <input type='file' id="imgInp" name="imgInp" accept=".jpg,.jpeg,.png">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
+                        <input type="text" class="form-control" name="username2" id="username2"placeholder="กรุณากรอกชื่อผู้ใช้งาน" value="<?php echo $row_profile['m_username']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">รหัสผ่าน</label>
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="รหัสผ่านของคุณ" value="<?php echo $row_profile['m_password']; ?>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">ชื่อ-นามสกุล</label>
+                        <input type="text" class="form-control" name="name2" id="name2"placeholder="กรุณากรอก ชื่อ-นามสกุล" value="<?php echo $row_profile['m_name']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">อีเมล์</label>
+                        <input type="email" class="form-control" name="email2" id="email2"placeholder="กรุณากรอก อีเมล" value="<?php echo $row_profile['m_email']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">เบอร์โทรศัพท์</label>
+                        <input type="text" class="form-control" name="telephone2" id="telephone2"placeholder="กรุณากรอก เบอร์โทรศัพท์" value="<?php echo $row_profile['m_telephone']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">ที่อยู่</label>
+                        <textarea class="form-control" id="address2" rows="3" name="address2"><?php echo $row_profile['m_address']; ?></textarea>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary  btn-block" name="btn-updateprofile" id="btn-updateprofile" value="บันทึก">
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php if(isset($_SESSION['id'])){ ?>
+<div class="profile">
+    <a data-toggle="modal" data-target="#profile" title="แก้ไขโปรไฟล์"><i class="far fa-3x fa-user-circle"></i></a>
+</div>
+<?php } ?>
 <!------------------------------------------------------------------------------->
 <style>
     li {
@@ -215,52 +306,23 @@
         });
 
     });
+
 </script>
+
 <script type="text/javascript">
- /*   $(function($) {
-        $("#buttonlogin").click(function() {
-            $.ajax({
-                type: "POST",
-                url: "function/login.php",
-                data: $("#login").serialize(),
-                success: function(result) {
-                    if (result.status == 1) // Success
-                    {
-                        swal({
-                            title: "เข้าสู่ระบบสำเร็จ!",
-                            text: result.message,
-                            icon: "success",
+ function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
-                        }).then((value) => {
-                            location.reload();
-                        });
-                    }if (result.status == 2) // Success
-                    {
-                        swal({
-                            title: "เข้าสู่ระบบแอดมินสำเร็จ!",
-                            text: result.message,
-                            icon: "success",
+    reader.onload = function(e) {
+      $('#imgprofile').attr('src', e.target.result);
+    }
 
-                        }).then((value) => {
-                            location.href("admin/index.php");
-                        });
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 
-
-
-                    } else // Err
-                    {
-                        swal({
-                            title: "รหัสหรือชื่อผู้ใช้ไม่ถูกต้อง!",
-                            text: result.message,
-                            icon: "error",
-                        });
-
-
-                    }
-                }
-            });
-
-        });
-
-    });*/
+$("#imgInp").change(function() {
+  readURL(this);
+});
 </script>

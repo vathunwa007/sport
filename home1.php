@@ -2,15 +2,25 @@
 error_reporting(0);
 $searchamphur = $_POST['searchamphur'];
 $searchsport = $_POST['searchsport'];
-$sport = array("การยิงธนู", "กรีฑา", "แบดมินตัน", "กีฬาเบสบอล", "บาสเกตบอล", "หาดวอลเลย์บอล", "มวย", "เรือแคนู / พื้นน้ำเรียบเรือคายัค", "เรือแคนู / เรือคายัคสลาลม", "BMX ขี่จักรยาน", "ขี่จักรยานเสือภูเขา", "จักรยานถนน", "ติดตามการปั่นจักรยาน", "การดำน้ำ", "นักขี่ม้า", "การเล่นฟันดาบ", "ฟุตบอล", "ยิมนาสติกสากล", "ยิมนาสติกเข้าจังหวะ", "แทรมโพลี", "แฮนด์บอล", "ฮอกกี้", "ยูโด", "ปัญจกรีฑาสมัยใหม่", "การโยกย้าย", "การแล่นเรือ", "การยิง", "ซอฟท์บอล", "ว่ายน้ำ", "Synchronized ว่ายน้ำ", "เทเบิลเทนนิส", "เทควันโดทำ", "เทนนิส", "ไตรกีฬา", "วอลเลย์บอล", "น้ำโปโล", "ยกน้ำหนัก", "มวยปล้ำ");
-$aria = array("คลองสาน", "คลองเตย", "จอมทอง", "จตุจักร", "ดุสิต", "ดอนเมือง", "ตลิ่งชัน", "ธนบุรี", "บางกอกน้อย", "บางกอกใหญ่", "บางกะปิ", "บางขุนเทียน", "บางเขน", "บางคอแหลม", "บางซื่อ", "บางพลัด", "บางรัก", "บึงกุ่ม", "ประเวศ", "ปทุมวัน", "ป้อมปราบศัตรูพ่าย", "พญาไท", "พระโขนง", "พระนคร", "ภาษีเจริญ", "มีนบุรี", "ยานนาวา", "ราชเทวี", "ราษฎร์บูรณะ", "ลาดกระบัง", "ลาดพร้าว", "สาทร", "สัมพันธวงศ์", "หนองแขม", "หนองจอก", "ห้วยขวาง", "สวนหลวง", "ดินแดง", "หลักสี่", "สายไหม", "คันนายาว", "สะพานสูง", "วังทองหลาง", "คลองสามวา", "วัฒนา", "บางนา", "ทวีวัฒนา", "บางแค", "ทุ่งครุ", "บางบอน");
+$sport = array("เลือกกีฬาทั้งหมด","การยิงธนู", "กรีฑา", "แบดมินตัน", "กีฬาเบสบอล", "บาสเกตบอล", "หาดวอลเลย์บอล", "มวย", "เรือแคนู / พื้นน้ำเรียบเรือคายัค", "เรือแคนู / เรือคายัคสลาลม", "BMX ขี่จักรยาน", "ขี่จักรยานเสือภูเขา", "จักรยานถนน", "ติดตามการปั่นจักรยาน", "การดำน้ำ", "นักขี่ม้า", "การเล่นฟันดาบ", "ฟุตบอล", "ยิมนาสติกสากล", "ยิมนาสติกเข้าจังหวะ", "แทรมโพลี", "แฮนด์บอล", "ฮอกกี้", "ยูโด", "ปัญจกรีฑาสมัยใหม่", "การโยกย้าย", "การแล่นเรือ", "การยิง", "ซอฟท์บอล", "ว่ายน้ำ", "Synchronized ว่ายน้ำ", "เทเบิลเทนนิส", "เทควันโดทำ", "เทนนิส", "ไตรกีฬา", "วอลเลย์บอล", "น้ำโปโล", "ยกน้ำหนัก", "มวยปล้ำ");
+$aria = array("เลือกทั้งหมด","คลองสาน", "คลองเตย", "จอมทอง", "จตุจักร", "ดุสิต", "ดอนเมือง", "ตลิ่งชัน", "ธนบุรี", "บางกอกน้อย", "บางกอกใหญ่", "บางกะปิ", "บางขุนเทียน", "บางเขน", "บางคอแหลม", "บางซื่อ", "บางพลัด", "บางรัก", "บึงกุ่ม", "ประเวศ", "ปทุมวัน", "ป้อมปราบศัตรูพ่าย", "พญาไท", "พระโขนง", "พระนคร", "ภาษีเจริญ", "มีนบุรี", "ยานนาวา", "ราชเทวี", "ราษฎร์บูรณะ", "ลาดกระบัง", "ลาดพร้าว", "สาทร", "สัมพันธวงศ์", "หนองแขม", "หนองจอก", "ห้วยขวาง", "สวนหลวง", "ดินแดง", "หลักสี่", "สายไหม", "คันนายาว", "สะพานสูง", "วังทองหลาง", "คลองสามวา", "วัฒนา", "บางนา", "ทวีวัฒนา", "บางแค", "ทุ่งครุ", "บางบอน");
 require_once "function/connect.php";
 $sql = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
 ON a.idmember = b.m_id ";
-if (isset($_POST['searchamphur'])) {
+if (isset($_POST['searchamphur']) or isset($_POST['searchsport']) ) {
     $sql = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
-ON a.idmember = b.m_id WHERE amphur = '$searchamphur' OR namesport = '$searchsport'";
+ON a.idmember = b.m_id WHERE amphur = '$searchamphur' AND namesport = '$searchsport'";
+} if(isset($_POST['searchamphur']) && $_POST['searchsport']== "เลือกกีฬาทั้งหมด"){
+    $sql = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
+    ON a.idmember = b.m_id WHERE amphur = '$searchamphur' ";
+} if(isset($_POST['searchsport']) && $_POST['searchamphur']== "เลือกทั้งหมด"){
+    $sql = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
+    ON a.idmember = b.m_id WHERE namesport = '$searchsport' ";
+} if($_POST['searchsport'] == "เลือกกีฬาทั้งหมด" && $_POST['searchamphur']== "เลือกทั้งหมด"){
+    $sql = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
+    ON a.idmember = b.m_id ";
 }
+
 $query = mysqli_query($con, $sql) or die(mysqli_error($con));
 $showpost = mysqli_fetch_array($query);
 $total = mysqli_num_rows($query);
@@ -26,6 +36,40 @@ $total = mysqli_num_rows($query);
     <title>Document</title>
     <?php include "head.php"; ?>
 
+    <style>
+    .card-img-top{
+
+        background-size: 100%;
+        transition: 0.5s;
+        background-position: center;
+    }
+    .card-img-top:hover{
+        opacity: 78%;
+        background-size: 110%;
+        transition: 0.5s;
+    }
+    #postid{
+        position: absolute;
+        top:25%;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        text-align: center;
+        display: none;
+        color:white;
+        border: 2px solid white;
+
+    }
+
+    .card-img-top:hover + #postid{
+
+        display: block;
+
+    }
+
+    </style>
 </head>
 
 <body>
@@ -45,8 +89,6 @@ $total = mysqli_num_rows($query);
                             <select class="form-control" name="searchsport">
                                 <?php if(isset($searchsport)){
                                 echo "<option>$searchsport</option>";
-                                }else{
-                                echo "<option>เลือกกีฬา</option>";
                                 } ?>
                                 <?php foreach ($sport as $value) {
                                     echo "<option>$value</option>";
@@ -57,9 +99,7 @@ $total = mysqli_num_rows($query);
                             <select class="form-control" name="searchamphur">
                             <?php if(isset($searchamphur)){
                                 echo "<option>$searchamphur</option>";
-                                }else{
-                                echo "<option>เลือกทั้งหมด</option>";
-                                } ?>
+                            }?>
                                 <?php foreach ($aria as $value) {
                                     echo "<option>$value</option>";
                                 } ?>
@@ -80,9 +120,9 @@ $total = mysqli_num_rows($query);
 
 <div class="card" style="width: 18rem;">
 <img class="card-img-top" src="./img/<?php echo $showpost['image']; ?>" alt="Card image cap"height="300">
-
+<div id="postid"><h5><strong><?php echo $showpost['m_name']; ?></strong></h5></div>
   <div class="card-body">
-    <p class="card-title"><strong> ชื่อผู้สอน :</strong><?php echo $showpost['m_username']; ?></p>
+    <p class="card-title"><strong> ชื่อผู้สอน :</strong><?php echo $showpost['m_name']; ?></p>
     <p class="card-text"><strong>ประเภทกีฬา :</strong><?php echo $showpost['namesport']; ?></p>
     <p class="card-text"><strong>เขตพื้นที่ :</strong><?php echo $showpost['amphur']; ?></p>
     <a href="detail.php?id=<?php echo $showpost['id']; ?>" class="btn btn-info btn-block"><i class="fas fa-comment text-light"></i>ดูรายละเอียดผู้สอน</button></a>

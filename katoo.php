@@ -174,6 +174,7 @@ $total_comment = mysqli_num_rows($querycomment);
         <div class="card text-center">
             <div class="card-header clearfix ">
                 <h5 class="float-left"><?php echo $row_showkatoo['namekatoo']; ?></h5>
+
             </div>
             <div class="card-body">
 
@@ -192,8 +193,12 @@ $total_comment = mysqli_num_rows($querycomment);
             do {  $i++;?>
                 <div id="showcomment" class="card w-100">
 
-                    <div class="card-body">
-                    <p style="font-size:13px;padding-bottom:1rem;">ความคิดเห็นที่ <?= $i ?></p>
+                    <div class="card-body ">
+                    <div class="d-flex bd-highlight">
+                    <p class="w-100 bd-highlight" style="font-size:13px;padding-bottom:1rem;">ความคิดเห็นที่ <?= $i ?></p>
+                    <img class="flex-shrink-1 bd-highlight" src="img/<?php echo $row_comment['imageprofile']; ?>" alt="" width="50">
+                    </div>
+
                         <?php echo $row_comment['comment']; ?>
                     </div>
                     <div class="card-footer text-muted">

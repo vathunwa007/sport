@@ -27,6 +27,9 @@ if($result ->num_rows == 1){
  $_SESSION['telephone'] = $row_user['m_telephone'];
  $_SESSION['address'] = $row_user['m_address'];
  $_SESSION['level'] = $row_user['m_level'];
+ $_SESSION['imageprofile'] = $row_user['imageprofile'];
+ $_SESSION['password'] = $row_user['m_password'];
+
 
  mysqli_close($con);
 

@@ -46,6 +46,13 @@ $total_comment = mysqli_num_rows($querycomment);
 
     </style>
     <script>
+        function showalert(i,msg){
+            swal({
+                            title: msg,
+                            text: result.message,
+                            icon: i,
+                        });
+        }
         tinymce.init({
             selector: 'textarea#comment',
             height: 300,
@@ -127,12 +134,13 @@ $total_comment = mysqli_num_rows($querycomment);
         $("#sentcomment").click(function() {
             $.ajax({
                 type: "POST",
-                async: true,
+                async: false,
                 url: "function/commentpost.php",
                 data: $("#commentpost").serialize()+ escape(ed.getContent()),
                 success: function(result4) {
                     if (result4.status == 1) // Success
                     {
+
                         alert("แสดงความคิดเห็นสำเร็จแล้ว");
                         location.reload();
                     } else // Err
@@ -201,9 +209,10 @@ $total_comment = mysqli_num_rows($querycomment);
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 mt-2">
-                            <p class="lead">ชื่อผู้สอน : <?php echo $showpost['m_username']; ?></p>
+                            <p class="lead">ชื่อผู้สอน : <?php echo $showpost['m_name']; ?></p>
                             <p class="lead">กีฬาที่สอน : <?php echo $showpost['namesport']; ?></p>
                             <p class="lead">รายละเอียดการสอน : <?php echo $showpost['detail']; ?></p>
+                            <p class="lead">ผลงาน : <?php echo $showpost['works']; ?></p>
                             <p class="lead">สถาณที่เปิดสอน : <?php echo $showpost['location']; ?></p>
                             <p class="lead">เบอร์โทรศัพท์ : <?php echo $showpost['telephone']; ?></p>
                             <p class="lead">อีเมล์ : <?php echo $showpost['email']; ?></p>
@@ -223,7 +232,10 @@ $total_comment = mysqli_num_rows($querycomment);
                     <div id="showcomment" class="card w-100 mt-5">
 
                         <div class="card-body">
-                        <p style="font-size:13px;padding-bottom:1rem;">ความคิดเห็นที่ <?= $i ?></p>
+                        <div class="d-flex bd-highlight">
+                    <p class="w-100 bd-highlight" style="font-size:13px;padding-bottom:1rem;">ความคิดเห็นที่ <?= $i ?></p>
+                    <img class="flex-shrink-1 bd-highlight" src="img/<?php echo $row_comment['imageprofile']; ?>" alt="" width="50">
+                    </div>
                             <?php echo $row_comment['comment']; ?>
                         </div>
                         <div class="card-footer text-muted">

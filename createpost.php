@@ -40,7 +40,7 @@ $aria = array("คลองสาน", "คลองเตย", "จอมทอ
                         <div class="card-body col-6 mx-auto">
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">ชื่อ-นามสกุล</label>
-                                <input type="text" class="form-control" name="name" placeholder="กรุณาใส่ชื่อ-นามสกุล" required>
+                                <input type="text" class="form-control" name="name"placeholder="กรุณาใส่ชื่อ-นามสกุล"value="<?php echo $_SESSION['fullname']; ?>" readonly required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">กีฬาที่สอน</label>
@@ -54,7 +54,11 @@ $aria = array("คลองสาน", "คลองเตย", "จอมทอ
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">รายละเอียดการสอน</label>
-                                <textarea class="form-control" name="work" rows="3"></textarea>
+                                <textarea class="form-control" name="detail" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">ผลงานที่ได้รับ</label>
+                                <textarea class="form-control" name="works" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">สถาณที่เปิดสอน</label>

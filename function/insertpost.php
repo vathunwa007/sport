@@ -5,14 +5,15 @@ session_start();
 require_once "connect.php";
 $name = $_POST["name"];
 $sport = $_POST["sport"];
-$work = $_POST["work"];
+$detail = $_POST['detail'];
+$work = $_POST["works"];
 $address = $_POST["address"];
 $location = $_POST["location"];
 $telephone = $_POST["telephone"];
 $email = $_POST["email"];
 $filename = $_FILES["fileToUpload"]["name"][0];
 if($check !== false) {
-    $sql ="INSERT INTO `tb_addcoach` (`idmember`, `namesport`, `detail`, `location`, `amphur`,`telephone`,`email`, `image`,`datetime`) VALUES ('$_SESSION[id]', '$sport', '$work', '$address', '$location','$telephone','$email', '$filename',current_timestamp())";
+    $sql ="INSERT INTO `tb_addcoach` (`idmember`, `namesport`, `detail`,`works`, `location`, `amphur`,`telephone`,`email`, `image`,`datetime`) VALUES ('$_SESSION[id]', '$sport','$detail', '$work', '$address', '$location','$telephone','$email', '$filename',current_timestamp())";
     $result = mysqli_query($con,$sql)or die(mysqli_error($con));
     $lastid =mysqli_insert_id($con);
 
