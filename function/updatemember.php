@@ -12,8 +12,6 @@ $address = $_POST['address'];
 $level = $_POST['level'];
 $sucurity = 'pornhub.com';
 $passsucurity = hash_hmac('sha256',$password,$sucurity);
-
-
 $sql = "UPDATE `tb_member` SET `m_username` = '$username',`m_password` = '$password', `m_name` = '$name', `m_email` = '$email', `m_telephone` = '$telephone',`m_address` = '$address',`m_level` = '$level' WHERE `m_id` = $idmember";
 	$query = mysqli_query($con,$sql);
     if($query) {

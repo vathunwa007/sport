@@ -662,7 +662,7 @@ switch ($page) {
         if(page != 3){
             $('#create').addClass('hide');
         }
-        console.log(x);
+        //console.log(x);
 
         $("#btnSend").click(function() {
             $.ajax({
@@ -690,6 +690,7 @@ switch ($page) {
                 type: "POST",
                 url: "../function/updatemember.php",
                 data: $("#register").serialize(),
+
                 success: function(result) {
                     if (result.status == 1) // Success
                     {
