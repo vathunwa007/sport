@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_REQUEST['updateprofile'])){
     echo "<script> swal({
         title: 'บันทึกการแก้ไขเรียบร้อย!',
@@ -12,6 +13,15 @@ if(isset($_REQUEST['updateprofile'])){
         icon: 'success',
     });</script>";
 }
+include "function/connect.php";
+$sql = "SELECT a.m_id,a.m_username,b.id,b.namekatoo,b.detailkatoo,b.datetime,b.status,b.idmember
+FROM tb_member a
+INNER JOIN tb_katoo b
+ON a.m_id = b.idmember WHERE a.m_id = $_SESSION[id]";
+$rowsetting = mysqli_query($con, $sql) or die(mysqli_error($con));
+$row_katoosetting = mysqli_fetch_assoc($rowsetting);
+$totalrow_katoosetting = mysqli_num_rows($rowsetting);
+$num = 0;
 ?>
 <style>
     .line {
@@ -47,6 +57,12 @@ if(isset($_REQUEST['updateprofile'])){
     .navbar-light .navbar-nav .nav-link {
         color: rgb(0, 0, 0);
     }
+    .adminback {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 99;
+}
 </style>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #ebebeb;">
     <a class="navbar-brand" href="#"> <img src="http://pub-static.haozhaopian.net/assets/projects/pages/dca71680-c318-11e9-ae0a-0d283ef8239c_118a85ea-30d6-4f5d-8da4-896794ecf8b2_thumb.jpg" width="150" height="60" class="d-inline-block align-top" alt="">
@@ -71,6 +87,9 @@ if(isset($_REQUEST['updateprofile'])){
             </li>
             <li class="nav-item <?php echo $navbar[4]; ?>">
                 <a class="nav-link" href="home4.php"><i class="fas fa-address-card text-info"></i>ติดต่อ</a>
+            </li>
+            <li class="nav-item <?php echo $navbar[4]; ?>">
+                <a class="nav-link" href="home4.php"><i class="fas fa-address-card text-info"></i>จัดการปรกาศ</a>
             </li>
 
         </ul>
@@ -203,6 +222,7 @@ if(isset($_REQUEST['updateprofile'])){
     </div>
 </div>
 <?php
+error_reporting(0);
 include 'function/connect.php';
 $sqlprofile = "SELECT * FROM `tb_member` WHERE m_id = $_SESSION[id]";
 $queryprofile = mysqli_query($con,$sqlprofile);
@@ -225,7 +245,7 @@ $row_profile = mysqli_fetch_array($queryprofile);
                             <img src="img/<?php echo $row_profile['imageprofile']; ?>" id="imgprofile" name="imgprofile" class="card-img-top" alt="..." style="border-radius: 50%; width:250px; height:250px; margin: 0 auto;">
                             <div class="card-body">
                                 <p class="card-text text-warning">เปลี่ยนรูปภาพ.</p>
-                                <input type='file' id="imgInp" name="imgInp" accept=".jpg,.jpeg,.png">
+                                <input type='file' id="imgInp" name="imgInp" accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG">
 
                             </div>
                         </div>
@@ -264,12 +284,97 @@ $row_profile = mysqli_fetch_array($queryprofile);
         </div>
     </div>
 </div>
+<!-- Modalsetting-->
+<div class="modal fade" id="modalsetting" tabindex="-1" role="dialog" aria-labelledby="modalsetting" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalsetting">จัดการข้อมูลการแสดงผลทั้งหมด</h5>
+                <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <?php if($totalrow_katoosetting > 1){ ?>
+            <div class="table-responsive " style="width: s;">
+            <table class="table" id="datatable">
+                <thead class="text-secondary">
+
+
+                    <th>
+                        จัดการ
+                    </th>
+                    <th>
+                        ลำดับ
+                    </th>
+                    <th>
+                        หัวข้อ
+                    </th>
+                    <th>
+                        ชื่อผู้ใช้
+                    </th>
+                    <th>
+                        วัน/เวลา
+                    </th>
+                    <th>
+                        การตอบกลับล่าสุด
+                    </th>
+
+
+
+
+
+                </thead>
+                <tbody>
+
+                    <?php do { ?>
+
+                        <tr>
+
+                            <th> <a href="#" data-toggle="modal" data-target="#editkatoo"onclick="showkatoo(<?= $row_katoosetting['id']; ?>);">
+                                    <i class="fas fa-edit text-success"></i>
+                                </a>
+                                <a href="#" id="btndel" onclick="deletee(<?= $row_katoosetting['id']; ?>);"><i class="fas fa-trash-alt text-danger"></i></a> </td>
+                            </th>
+                            <th scope="row"><?php echo $num += 1; ?></th>
+
+                            <td><?php echo $row_katoosetting['namekatoo']; ?></td>
+                            <td><?php echo  $row_katoosetting['m_username']; ?></td>
+                            <td><?php echo  $row_katoosetting['datetime']; ?></td>
+                            <td><?php echo  $row_katoosetting['m_username']; ?></td>
+
+
+                        </tr>
+                    <?php } while ($row_katoosetting = mysqli_fetch_assoc($rowsetting)); ?>
+                </tbody>
+            </table>
+        </div>
+        <?php }else{
+            echo "คุณยังไม่มีข้อมูลการโพสในระบบ";
+        } ?>
+            </div>
+
+        </div>
+    </div>
+</div>
 <?php if(isset($_SESSION['id'])){ ?>
 <div class="profile">
-    <a data-toggle="modal" data-target="#profile" title="แก้ไขโปรไฟล์"><i class="far fa-3x fa-user-circle"></i></a>
+    <a data-toggle="modal" data-target="#profile" title="แก้ไขโปรไฟล์"><i class="fa fa-3x fa-user-circle"></i></a>
 </div>
 <?php } ?>
-<!------------------------------------------------------------------------------->
+<?php if($_SESSION['level'] == 1){ ?>
+<div class="adminback">
+    <a href="admin/index.php" title="กลับสู่ระบบแอดมิน"><i class="fa fa-3x fa-chevron-circle-left text-info" aria-hidden="true"></i>
+</a>
+</div>
+<?php }else if($_SESSION['level'] == 0){ ?>
+    <div class="adminback">
+    <a data-toggle="modal" data-target="#modalsetting" title="จัดการโพสและกระดาน"><i class="fa fa-3x fa-calendar-check text-info" aria-hidden="true"></i>
+</a>
+</div>
+<?php } ?>
+<!----------------------------
+--------------------------------------------------->
 <style>
     li {
         font-size: 20px;

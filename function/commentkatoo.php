@@ -5,6 +5,7 @@ require_once "connect.php";
 $idkatoo = $_POST['idkatoo'];
 $comment = $_POST["comment"];
 $sql ="INSERT INTO tb_commentkatoo (`idkatoo`, `idmember`, `comment`, `datetime`) VALUES ($idkatoo,'$_SESSION[id]','$comment',current_timestamp())";
+
 $query = mysqli_query($con,$sql)or die(mysqli_error($con));
 //$lastid =mysqli_insert_id($con);
 if($query){

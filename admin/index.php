@@ -107,6 +107,11 @@ switch ($page) {
                                 <i class="nav-link-icon fa fa-database"> </i> ข้อเสนอแนะ
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a href="../index.php" class="nav-link <?= $contact ?>">
+                                <i class="nav-link-icon fa fa-newspaper"> </i> เข้าชมระบบแบบสมาชิก
+                            </a>
+                        </li>
                         <li class="btn-group nav-item">
                             <a href="#" class="nav-link btn btn-primary text-light" id="create" data-toggle="modal" data-target="#editkatoo">
                                 <i class="nav-link-icon fa fa-edit text-light"></i> สร้างกระทู้
@@ -141,7 +146,7 @@ switch ($page) {
                                     </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
-                                    <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
+                                    <button type="button" id="btnwarning" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
                                         <i class="fa text-white fa-calendar pr-1 pl-1"></i>
                                     </button>
                                 </div>
@@ -630,7 +635,7 @@ switch ($page) {
         </div>
     </div>
 </div>
-
+<input type="number" disabled value="<?= $total;?>" id="numrow">
 </body>
 
 </html>
@@ -777,7 +782,32 @@ switch ($page) {
 $("#imgInp").change(function() {
   readURL(this);
 });
+
+setInterval(function()
+{
+    $.ajax({
+      type:"post",
+      url: "../function/warning.php",
+      datatype:"html",
+      async: false,
+      success:function(result)
+      {
+        var num = $('#numrow').val();
+
+        console.log(result.message);
+        if(num != 0 && num < result.message){
+            num++
+            console.log(num);
+            $('#numrow').val(num);
+            $('#btnwarning').click();
+
+        } //do something with response data
+      }
+    });
+}, 5000);
+
 </script>
+
 <?php
 if (isset($_REQUEST['success'])) {
     echo '<script> swal({

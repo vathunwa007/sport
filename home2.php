@@ -16,7 +16,7 @@ $num = 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>กระดานถาม-ตอบ</title>
     <?php include "head.php"; ?>
 
 <script>
@@ -66,7 +66,7 @@ function gotokatoo(id){
       <th scope="col">หัวข้อ</th>
       <th scope="col">ชื่อผู้ใช้</th>
       <th scope="col">วัน/เวลา</th>
-      <th scope="col">การตอบกลับ</th>
+      <!--<th scope="col">การตอบกลับ</th>-->
 
     </tr>
   </thead>
@@ -78,7 +78,7 @@ function gotokatoo(id){
       <td><?php echo $row_katoo['namekatoo']; ?></td>
       <td><?php echo  $row_katoo['m_username']; ?></td>
       <td><?php echo  $row_katoo['datetime']; ?></td>
-      <td><?php echo  $row_katoo['m_username']; ?></td>
+     <!-- <td><?php echo  $row_katoo['m_username']; ?></td> -->
 
 
     </tr>

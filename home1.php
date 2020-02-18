@@ -33,7 +33,7 @@ $total = mysqli_num_rows($query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ประกาศสอน</title>
     <?php include "head.php"; ?>
 
     <style>
@@ -118,7 +118,7 @@ $total = mysqli_num_rows($query);
             <?php if ($total > 0) {
                 do { ?>
 
-<div class="card" style="width: 18rem;">
+<div class="card col-3" style="width: 18rem;">
 <img class="card-img-top" src="./img/<?php echo $showpost['image']; ?>" alt="Card image cap"height="300">
 <div id="postid"><h5><strong><?php echo $showpost['m_name']; ?></strong></h5></div>
   <div class="card-body">
