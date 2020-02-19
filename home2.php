@@ -38,13 +38,13 @@ function gotokatoo(id){
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="https://media-exp1.licdn.com/dms/image/C561BAQGC1UWGVRjVcw/company-background_10000/0?e=2159024400&v=beta&t=Ig3VjUHzsN5NVPkl0ujvVmIGjfkL_SLP7WuS14e0Bl0" alt="First slide" height="350">
+      <img class="d-block w-100" src="https://images.unsplash.com/photo-1483721310020-03333e577078?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" alt="First slide" height="450">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="https://coverfiles.alphacoders.com/650/65076.jpg" alt="Second slide" height="350">
+      <img class="d-block w-100" src="https://images.unsplash.com/photo-1519861531473-9200262188bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" alt="Second slide" height="450">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="https://coverfiles.alphacoders.com/699/69908.jpg" alt="Third slide" height="350">
+      <img class="d-block w-100" src="https://coverfiles.alphacoders.com/699/69908.jpg" alt="Third slide" height="450">
     </div>
   </div>
 </div>
@@ -71,18 +71,18 @@ function gotokatoo(id){
     </tr>
   </thead>
   <tbody>
-  <?php do { ?>
+  <?php if($totalrow_katoo >= 1){do { ?>
 
-    <tr onclick="gotokatoo(<?php echo $row_katoo['id']; ?>);">
-      <th scope="row"><?php echo $num+=1 ; ?></th>
-      <td><?php echo $row_katoo['namekatoo']; ?></td>
-      <td><?php echo  $row_katoo['m_username']; ?></td>
-      <td><?php echo  $row_katoo['datetime']; ?></td>
+    <tr onclick="gotokatoo(<?php echo $row_katoo['id']; ?>);" style="height: 100px; ">
+      <th scope="row" class="align-middle"><?php echo $num++ ; ?></th>
+      <td class="align-middle"><?php echo $row_katoo['namekatoo']; ?></td>
+      <td class="align-middle"><?php echo  $row_katoo['m_username']; ?></td>
+      <td class="align-middle"><?php echo  $row_katoo['datetime']; ?></td>
      <!-- <td><?php echo  $row_katoo['m_username']; ?></td> -->
 
 
     </tr>
-    <?php } while ($row_katoo= mysqli_fetch_assoc($row)); ?>
+    <?php } while ($row_katoo= mysqli_fetch_assoc($row));}else{ echo"<p class='text-danger'>ไม่มีกระทู้ในระบบ</p>"; } ?>
   </tbody>
 </table>
   </div>

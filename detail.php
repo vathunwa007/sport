@@ -31,7 +31,7 @@ $total_comment = mysqli_num_rows($querycomment);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>รายละเอียดผู้สอน</title>
     <?php include "head.php"; ?>
     <style>
           .card-footer {
@@ -178,7 +178,7 @@ $total_comment = mysqli_num_rows($querycomment);
                                 <ol class="carousel-indicators">
                                     <?php $i = 0;
                                     do { ?>
-                                        <img data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i; ?>" class="active d-block w-25" src="img/<?php echo $showimage['image']; ?>" alt="First slide">
+                                        <img data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i; ?>" class="active d-block w-25" src="img/<?php echo $showimage['image']; ?>" alt="First slide" height="100">
 
                                     <?php $i++;
                                     } while ($showimage = mysqli_fetch_assoc($imagequery)); ?>
@@ -209,13 +209,13 @@ $total_comment = mysqli_num_rows($querycomment);
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 mt-2">
-                            <p class="lead">ชื่อผู้สอน : <?php echo $showpost['m_name']; ?></p>
-                            <p class="lead">กีฬาที่สอน : <?php echo $showpost['namesport']; ?></p>
-                            <p class="lead">รายละเอียดการสอน : <?php echo $showpost['detail']; ?></p>
-                            <p class="lead">ผลงาน : <?php echo $showpost['works']; ?></p>
-                            <p class="lead">สถาณที่เปิดสอน : <?php echo $showpost['location']; ?></p>
-                            <p class="lead">เบอร์โทรศัพท์ : <?php echo $showpost['telephone']; ?></p>
-                            <p class="lead">อีเมล์ : <?php echo $showpost['email']; ?></p>
+                            <p class="lead"><label class="font-weight-bold">ชื่อผู้สอน : </label>  <?php echo $showpost['m_name']; ?></p>
+                            <p class="lead"><label class="font-weight-bold">กีฬาที่สอน : </label><?php echo $showpost['namesport']; ?></p>
+                            <p class="lead"><label class="font-weight-bold">รายละเอียดการสอน : </label><?php echo $showpost['detail']; ?></p>
+                            <p class="lead"><label class="font-weight-bold">ผลงาน : </label><?php echo $showpost['works']; ?></p>
+                            <p class="lead"><label class="font-weight-bold">สถาณที่เปิดสอน : </label><?php echo $showpost['location']; ?></p>
+                            <p class="lead"><label class="font-weight-bold">เบอร์โทรศัพท์ : </label><?php echo $showpost['telephone']; ?></p>
+                            <p class="lead"><label class="font-weight-bold">อีเมล์ : </label><?php echo $showpost['email']; ?></p>
 
 
                         </div>

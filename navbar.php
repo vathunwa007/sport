@@ -13,15 +13,7 @@ if(isset($_REQUEST['updateprofile'])){
         icon: 'success',
     });</script>";
 }
-include "function/connect.php";
-$sql = "SELECT a.m_id,a.m_username,b.id,b.namekatoo,b.detailkatoo,b.datetime,b.status,b.idmember
-FROM tb_member a
-INNER JOIN tb_katoo b
-ON a.m_id = b.idmember WHERE a.m_id = $_SESSION[id]";
-$rowsetting = mysqli_query($con, $sql) or die(mysqli_error($con));
-$row_katoosetting = mysqli_fetch_assoc($rowsetting);
-$totalrow_katoosetting = mysqli_num_rows($rowsetting);
-$num = 0;
+
 ?>
 <style>
     .line {
@@ -88,9 +80,7 @@ $num = 0;
             <li class="nav-item <?php echo $navbar[4]; ?>">
                 <a class="nav-link" href="home4.php"><i class="fas fa-address-card text-info"></i>ติดต่อ</a>
             </li>
-            <li class="nav-item <?php echo $navbar[4]; ?>">
-                <a class="nav-link" href="home4.php"><i class="fas fa-address-card text-info"></i>จัดการปรกาศ</a>
-            </li>
+
 
         </ul>
         <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
@@ -295,7 +285,7 @@ $row_profile = mysqli_fetch_array($queryprofile);
                 </button>
             </div>
             <div class="modal-body">
-            <?php if($totalrow_katoosetting > 1){ ?>
+
             <div class="table-responsive " style="width: s;">
             <table class="table" id="datatable">
                 <thead class="text-secondary">
@@ -349,9 +339,7 @@ $row_profile = mysqli_fetch_array($queryprofile);
                 </tbody>
             </table>
         </div>
-        <?php }else{
-            echo "คุณยังไม่มีข้อมูลการโพสในระบบ";
-        } ?>
+
             </div>
 
         </div>
@@ -367,12 +355,13 @@ $row_profile = mysqli_fetch_array($queryprofile);
     <a href="admin/index.php" title="กลับสู่ระบบแอดมิน"><i class="fa fa-3x fa-chevron-circle-left text-info" aria-hidden="true"></i>
 </a>
 </div>
-<?php }else if($_SESSION['level'] == 0){ ?>
+<?php } ?>
+<!--
     <div class="adminback">
     <a data-toggle="modal" data-target="#modalsetting" title="จัดการโพสและกระดาน"><i class="fa fa-3x fa-calendar-check text-info" aria-hidden="true"></i>
 </a>
 </div>
-<?php } ?>
+-->
 <!----------------------------
 --------------------------------------------------->
 <style>
