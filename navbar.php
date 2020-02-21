@@ -556,7 +556,7 @@ $row_settingkatoo = mysqli_fetch_array($querysettingkatoo);
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">เนื้อหา</label>
-                        <textarea class="form-control" id="detailkatoo" rows="3" name="detailkatoo"></textarea>
+                        <textarea class="form-control" id="showdetailkatoo" rows="3" name="showdetailkatoo"></textarea>
                     </div>
 
                     <div class="modal-footer">
@@ -630,7 +630,7 @@ $row_settingkatoo = mysqli_fetch_array($querysettingkatoo);
                 {
                     $('#idkatoo').val(result.id);
                     $('#titlekatoo').val(result.namekatoo);
-                    $('#detailkatoo').val(result.detailkatoo);
+                    $('#showdetailkatoo').val(result.detailkatoo);
 
                 } else // Err
                 {
