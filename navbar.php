@@ -1,17 +1,39 @@
-<?php
 
-if(isset($_REQUEST['updateprofile'])){
+<?php
+$sportshow = array("การยิงธนู", "กรีฑา", "แบดมินตัน", "กีฬาเบสบอล", "บาสเกตบอล", "หาดวอลเลย์บอล", "มวย", "เรือแคนู / พื้นน้ำเรียบเรือคายัค", "เรือแคนู / เรือคายัคสลาลม", "BMX ขี่จักรยาน", "ขี่จักรยานเสือภูเขา", "จักรยานถนน", "ติดตามการปั่นจักรยาน", "การดำน้ำ", "นักขี่ม้า", "การเล่นฟันดาบ", "ฟุตบอล", "ยิมนาสติกสากล", "ยิมนาสติกเข้าจังหวะ", "แทรมโพลี", "แฮนด์บอล", "ฮอกกี้", "ยูโด", "ปัญจกรีฑาสมัยใหม่", "การโยกย้าย", "การแล่นเรือ", "การยิง", "ซอฟท์บอล", "ว่ายน้ำ", "Synchronized ว่ายน้ำ", "เทเบิลเทนนิส", "เทควันโดทำ", "เทนนิส", "ไตรกีฬา", "วอลเลย์บอล", "น้ำโปโล", "ยกน้ำหนัก", "มวยปล้ำ");
+$ariashow = array("คลองสาน", "คลองเตย", "จอมทอง", "จตุจักร", "ดุสิต", "ดอนเมือง", "ตลิ่งชัน", "ธนบุรี", "บางกอกน้อย", "บางกอกใหญ่", "บางกะปิ", "บางขุนเทียน", "บางเขน", "บางคอแหลม", "บางซื่อ", "บางพลัด", "บางรัก", "บึงกุ่ม", "ประเวศ", "ปทุมวัน", "ป้อมปราบศัตรูพ่าย", "พญาไท", "พระโขนง", "พระนคร", "ภาษีเจริญ", "มีนบุรี", "ยานนาวา", "ราชเทวี", "ราษฎร์บูรณะ", "ลาดกระบัง", "ลาดพร้าว", "สาทร", "สัมพันธวงศ์", "หนองแขม", "หนองจอก", "ห้วยขวาง", "สวนหลวง", "ดินแดง", "หลักสี่", "สายไหม", "คันนายาว", "สะพานสูง", "วังทองหลาง", "คลองสามวา", "วัฒนา", "บางนา", "ทวีวัฒนา", "บางแค", "ทุ่งครุ", "บางบอน");
+
+if (isset($_REQUEST['updateprofile'])) {
     echo "<script> swal({
         title: 'บันทึกการแก้ไขเรียบร้อย!',
         text: 'ทำการบันทึกสำเร็จ',
         icon: 'success',
     });</script>";
-}else if(isset($_REQUEST['updateprofileeror'])){
+} else if (isset($_REQUEST['updateprofileeror'])) {
     echo "<script> swal({
         title: 'ไม่สามารถบันทึกการแก้ไขได้!',
         text: 'เกิดข้อผิดพลาด',
         icon: 'success',
     });</script>";
+}
+
+//-----------delete-------
+if (isset($_GET['deletekatoo'])) {
+    include "function/connect.php";
+    $deletekatoo = $_GET['deletekatoo'];
+    $sqldelete = "DELETE FROM `tb_katoo` WHERE `tb_katoo`.`id`=$deletekatoo";
+    mysqli_query($con, $sqldelete);
+    echo '<script>alert("ลบกระทู้สำเร็จ");</script>';
+    mysqli_close($con);
+}
+if (isset($_GET['deletepost'])) {
+    include "function/connect.php";
+
+    $deletepost = $_GET['deletepost'];
+    $sqldelete = "DELETE FROM `tb_addcoach` WHERE `tb_addcoach`.`id`=$deletepost";
+    mysqli_query($con, $sqldelete);
+    echo '<script>alert("ลบประกาศสำเร็จ");</script>';
+    mysqli_close($con);
 }
 
 ?>
@@ -49,12 +71,13 @@ if(isset($_REQUEST['updateprofile'])){
     .navbar-light .navbar-nav .nav-link {
         color: rgb(0, 0, 0);
     }
+
     .adminback {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    z-index: 99;
-}
+        position: fixed;
+        top: 50%;
+        left: 0;
+        z-index: 99;
+    }
 </style>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #ebebeb;">
     <a class="navbar-brand" href="#"> <img src="http://pub-static.haozhaopian.net/assets/projects/pages/dca71680-c318-11e9-ae0a-0d283ef8239c_118a85ea-30d6-4f5d-8da4-896794ecf8b2_thumb.jpg" width="150" height="60" class="d-inline-block align-top" alt="">
@@ -86,7 +109,21 @@ if(isset($_REQUEST['updateprofile'])){
         <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
             <?php if (isset($_SESSION['id']) != null) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="function/logout.php">ออกจากระบบ<img src="https://img.icons8.com/flat_round/40/000000/shutdown--v1.png"></a>
+
+
+                    <div class="btn-group">
+                        <a class="nav-link" href="function/logout.php">ออกจากระบบ<img src="https://img.icons8.com/flat_round/40/000000/shutdown--v1.png"></a>
+                        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">setting</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#profile">ตั้งค่าโปรไฟล์</a>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalsettingpost">ดูประกาศสอนของคุณ</a>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modalsettingkatoo">ดูกระทู้ของคุณ</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">ออกจากระบบ</a>
+                        </div>
+                    </div>
                 </li>
             <?php } else { ?>
                 <li class="nav-item">
@@ -110,7 +147,7 @@ if(isset($_REQUEST['updateprofile'])){
                 <form action="function/login.php" name="login" id="login" method="POST">
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
-                        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  placeholder="กรุณากรอกชื่อผู้ใช้งาน">
+                        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="กรุณากรอกชื่อผู้ใช้งาน">
                         <small id="emailHelp" class="form-text text-muted">กรุณาใส่ชื่อผู้ใช้งานหากยังไม่มีกดที่ปุ่มสมัครสมาชิก.</small>
                     </div>
                     <div class="form-group">
@@ -215,7 +252,7 @@ if(isset($_REQUEST['updateprofile'])){
 error_reporting(0);
 include 'function/connect.php';
 $sqlprofile = "SELECT * FROM `tb_member` WHERE m_id = $_SESSION[id]";
-$queryprofile = mysqli_query($con,$sqlprofile);
+$queryprofile = mysqli_query($con, $sqlprofile);
 $row_profile = mysqli_fetch_array($queryprofile);
 ?>
 <!-- Modalprofile-->
@@ -242,7 +279,7 @@ $row_profile = mysqli_fetch_array($queryprofile);
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อผู้ใช้งาน</label>
-                        <input type="text" class="form-control" name="username2" id="username2"placeholder="กรุณากรอกชื่อผู้ใช้งาน" value="<?php echo $row_profile['m_username']; ?>">
+                        <input type="text" class="form-control" name="username2" id="username2" placeholder="กรุณากรอกชื่อผู้ใช้งาน" value="<?php echo $row_profile['m_username']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">รหัสผ่าน</label>
@@ -250,15 +287,15 @@ $row_profile = mysqli_fetch_array($queryprofile);
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">ชื่อ-นามสกุล</label>
-                        <input type="text" class="form-control" name="name2" id="name2"placeholder="กรุณากรอก ชื่อ-นามสกุล" value="<?php echo $row_profile['m_name']; ?>">
+                        <input type="text" class="form-control" name="name2" id="name2" placeholder="กรุณากรอก ชื่อ-นามสกุล" value="<?php echo $row_profile['m_name']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">อีเมล์</label>
-                        <input type="email" class="form-control" name="email2" id="email2"placeholder="กรุณากรอก อีเมล" value="<?php echo $row_profile['m_email']; ?>">
+                        <input type="email" class="form-control" name="email2" id="email2" placeholder="กรุณากรอก อีเมล" value="<?php echo $row_profile['m_email']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">เบอร์โทรศัพท์</label>
-                        <input type="text" class="form-control" name="telephone2" id="telephone2"placeholder="กรุณากรอก เบอร์โทรศัพท์" value="<?php echo $row_profile['m_telephone']; ?>">
+                        <input type="text" class="form-control" name="telephone2" id="telephone2" placeholder="กรุณากรอก เบอร์โทรศัพท์" value="<?php echo $row_profile['m_telephone']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">ที่อยู่</label>
@@ -274,94 +311,274 @@ $row_profile = mysqli_fetch_array($queryprofile);
         </div>
     </div>
 </div>
-<!-- Modalsetting-->
-<div class="modal fade" id="modalsetting" tabindex="-1" role="dialog" aria-labelledby="modalsetting" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<?php
+error_reporting(0);
+include 'function/connect.php';
+$sqlsettingpost = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
+ON a.idmember = b.m_id WHERE a.idmember = $_SESSION[id]";
+$querysettingpost = mysqli_query($con, $sqlsettingpost);
+$row_settingpost = mysqli_fetch_array($querysettingpost);
+?>
+<!-- Modalsettingpost-->
+<div class="modal fade" id="modalsettingpost" tabindex="-1" role="dialog" aria-labelledby="modalsettingpost" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalsetting">จัดการข้อมูลการแสดงผลทั้งหมด</h5>
+                <h5 class="modal-title" id="modalsettingpost">จัดการประกาศสอนของคุณ</h5>
                 <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-            <div class="table-responsive " style="width: s;">
-            <table class="table" id="datatable">
-                <thead class="text-secondary">
+                <div class="table-responsive " style="width:100%;">
+                    <table class="table" id="datatable">
+                        <thead class="text-secondary">
 
 
-                    <th>
-                        จัดการ
-                    </th>
-                    <th>
-                        ลำดับ
-                    </th>
-                    <th>
-                        หัวข้อ
-                    </th>
-                    <th>
-                        ชื่อผู้ใช้
-                    </th>
-                    <th>
-                        วัน/เวลา
-                    </th>
-                    <th>
-                        การตอบกลับล่าสุด
-                    </th>
-
-
-
-
-
-                </thead>
-                <tbody>
-
-                    <?php do { ?>
-
-                        <tr>
-
-                            <th> <a href="#" data-toggle="modal" data-target="#editkatoo"onclick="showkatoo(<?= $row_katoosetting['id']; ?>);">
-                                    <i class="fas fa-edit text-success"></i>
-                                </a>
-                                <a href="#" id="btndel" onclick="deletee(<?= $row_katoosetting['id']; ?>);"><i class="fas fa-trash-alt text-danger"></i></a> </td>
+                            <th>
+                                จัดการ
                             </th>
-                            <th scope="row"><?php echo $num += 1; ?></th>
+                            <th>
+                                ลำดับ
+                            </th>
+                            <th>
+                                ประเภทกีฬา
+                            </th>
+                            <th>
+                                สถาณที่
+                            </th>
+                            <th>
+                                วัน/เวลา
+                            </th>
 
-                            <td><?php echo $row_katoosetting['namekatoo']; ?></td>
-                            <td><?php echo  $row_katoosetting['m_username']; ?></td>
-                            <td><?php echo  $row_katoosetting['datetime']; ?></td>
-                            <td><?php echo  $row_katoosetting['m_username']; ?></td>
+
+                        </thead>
+                        <tbody>
+
+                            <?php do { ?>
+
+                                <tr>
+
+                                    <th> <a href="#" data-toggle="modal" data-target="#editpost" onclick="showpost(<?= $row_settingpost['id']; ?>);">
+                                            <i class="fas fa-edit text-success"></i>
+                                        </a>
+                                        <a href="#" id="btndel" onclick="deleteepost(<?= $row_settingpost['id']; ?>);"><i class="fas fa-trash-alt text-danger"></i></a> </td>
+                                    </th>
+                                    <th scope="row"><?php echo $num += 1; ?></th>
+
+                                    <td><?php echo $row_settingpost['namesport']; ?></td>
+                                    <td><?php echo  $row_settingpost['location']; ?></td>
+                                    <td><?php echo  $row_settingpost['datetime']; ?></td>
 
 
-                        </tr>
-                    <?php } while ($row_katoosetting = mysqli_fetch_assoc($rowsetting)); ?>
-                </tbody>
-            </table>
-        </div>
+
+                                </tr>
+                            <?php } while ($row_settingpost = mysqli_fetch_assoc($querysettingpost)); ?>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
         </div>
     </div>
 </div>
-<?php if(isset($_SESSION['id'])){ ?>
-<div class="profile">
-    <a data-toggle="modal" data-target="#profile" title="แก้ไขโปรไฟล์"><i class="fa fa-3x fa-user-circle"></i></a>
+<!-- Modaleditpost -->
+<div class="modal fade mt-5" id="editpost" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">แก้ไขรายละเอียดการประกาศสอนของคุณ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" name="updatepost" id="updatepost" method="POST">
+                    <input type="text" name="idpost" id="idpost" hidden>
+                    <div class="form-group">
+                                <label for="exampleFormControlInput1">ชื่อ-นามสกุล</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="กรุณาใส่ชื่อ-นามสกุล"value="<?php echo $_SESSION['fullname']; ?>" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">กีฬาที่สอน</label>
+                                <select class="form-control" name="sport" id="sport">
+                                    <option></option>
+                                    <?php foreach ($sportshow as $value) {
+                                        echo "<option>$value</option>"; ?>
+
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">รายละเอียดการสอน</label>
+                                <textarea class="form-control" name="detail" id="detail" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">ผลงานที่ได้รับ</label>
+                                <textarea class="form-control" name="works" id="works" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">สถาณที่เปิดสอน</label>
+                                <input type="text" class="form-control" name="address" id="address" placeholder="กรุณาระบุที่อยู่สถาณที่" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">เขตพื้นที่</label>
+                                <select class="form-control" name="location" id="location">
+                                    <option></option>
+                                    <?php foreach ($ariashow as $value) {
+                                        echo "<option>$value</option>";
+                                    } ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">เบอร์โทรศัพท์ติดต่อ</label>
+                                <input type="telephone" class="form-control" name="telephone" id="telephone" placeholder="กรุณาใส่หมายเลขเบอร์โทรศัพท์" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">อีเมล์</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="กรุณาใส่อีเมลของท่าน" required>
+                            </div>
+                            <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btneditpost" class="btn btn-info hide">แก้ไขประกาศ</button>
+
+                    </div>
+            </div>
+
+            </form>
+        </div>
+
+
+    </div>
 </div>
-<?php } ?>
-<?php if($_SESSION['level'] == 1){ ?>
-<div class="adminback">
-    <a href="admin/index.php" title="กลับสู่ระบบแอดมิน"><i class="fa fa-3x fa-chevron-circle-left text-info" aria-hidden="true"></i>
-</a>
+
+<?php
+error_reporting(0);
+include 'function/connect.php';
+$sqlsettingkatoo = "SELECT * FROM tb_katoo WHERE idmember = $_SESSION[id]";
+$querysettingkatoo = mysqli_query($con, $sqlsettingkatoo);
+$row_settingkatoo = mysqli_fetch_array($querysettingkatoo);
+?>
+<!-- Modalsettingkatoo-->
+<div class="modal fade" id="Modalsettingkatoo" tabindex="-1" role="dialog" aria-labelledby="Modalsettingkatoo" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Modalsettingkatoo">จัดการกระทู้ของคุณ</h5>
+                <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php if ($row_settingkatoo == null) {
+                    echo " <h5 class='text-danger'>ยังไม่มีกระทู้ที่คุณสร้าง</h5>";
+                } else { ?>
+                    <div class="table-responsive " style="width:100%;">
+                        <table class="table" id="datatable">
+                            <thead class="text-secondary">
+
+
+                                <th>
+                                    จัดการ
+                                </th>
+                                <th>
+                                    ลำดับ
+                                </th>
+                                <th>
+                                    หัวข้อ
+                                </th>
+                                <th>
+                                    สถาณะของกระทู้
+                                </th>
+                                <th>
+                                    วัน/เวลา
+                                </th>
+
+
+
+
+
+
+                            </thead>
+                            <tbody>
+
+                                <?php do { ?>
+
+                                    <tr>
+
+                                        <th> <a href="#" data-toggle="modal" data-target="#editkatoo" onclick="showkatoo(<?= $row_settingkatoo['id']; ?>);">
+                                                <i class="fas fa-edit text-success"></i>
+                                            </a>
+                                            <a href="#" id="btndel" onclick="deleteekatoo(<?= $row_settingkatoo['id']; ?>);"><i class="fas fa-trash-alt text-danger"></i></a> </td>
+                                        </th>
+                                        <th scope="row"><?php echo $numkatoo += 1; ?></th>
+
+                                        <td><?php echo $row_settingkatoo['namekatoo']; ?></td>
+                                        <td><?php if ($row_settingkatoo['status'] == 1) {
+                                                echo "<p class='text-success text-center'>ออนไลน์</p>";
+                                            } else {
+                                                echo "<p class='text-danger text-center'>ถูกปิดกั้นจากแอดมิน</p>";
+                                            } ?></td>
+                                        <td><?php echo  $row_settingkatoo['datetime']; ?></td>
+
+
+                                    </tr>
+                                <?php } while ($row_settingkatoo = mysqli_fetch_assoc($querysettingkatoo)); ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php } ?>
+
+            </div>
+
+        </div>
+    </div>
 </div>
-<?php } ?>
-<!--
+
+<!-- Modaleditkatoo -->
+<div class="modal fade mt-5" id="editkatoo" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">จัดการกระดานถาม-ตอบ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" name="updatekatoo" id="updatekatoo" method="POST">
+                    <input type="text" name="idkatoo" id="idkatoo" hidden>
+                    <div class="form-group" id="headkatoo">
+                        <label for="exampleInputEmail1">หัวข้อกระทู้</label>
+                        <input type="text" class="form-control" name="titlekatoo" id="titlekatoo" aria-describedby="emailHelp" placeholder="กรุณาตั้งชื่อกระทู้">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">เนื้อหา</label>
+                        <textarea class="form-control" id="detailkatoo" rows="3" name="detailkatoo"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btneditkatoo" class="btn btn-info hide">แก้ไขกระทู้</button>
+
+                    </div>
+            </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>
+<?php if ($_SESSION['level'] == 1) { ?>
     <div class="adminback">
-    <a data-toggle="modal" data-target="#modalsetting" title="จัดการโพสและกระดาน"><i class="fa fa-3x fa-calendar-check text-info" aria-hidden="true"></i>
-</a>
-</div>
--->
+        <a href="admin/index.php" title="กลับสู่ระบบแอดมิน"><i class="fa fa-3x fa-chevron-circle-left text-info" aria-hidden="true"></i>
+        </a>
+    </div>
+<?php } ?>
+
 <!----------------------------
 --------------------------------------------------->
 <style>
@@ -401,22 +618,156 @@ $row_profile = mysqli_fetch_array($queryprofile);
 
     });
 
+    function showkatoo(id) {
+        $('#exampleModalScrollableTitle').text("แก้ไขกระดานถาม-ตอบ");
+
+
+        $.ajax({
+            type: "GET",
+            url: "function/showkatoo.php?id=" + id,
+            success: function(result) {
+                if (result.status == 1) // Success
+                {
+                    $('#idkatoo').val(result.id);
+                    $('#titlekatoo').val(result.namekatoo);
+                    $('#detailkatoo').val(result.detailkatoo);
+
+                } else // Err
+                {
+                    alert("notshow");
+
+                }
+            }
+        });
+
+    }
+    function showpost(id) {
+        $.ajax({
+            type: "GET",
+            url: "function/showpost.php?id=" + id,
+            success: function(data) {
+                if (data.status == 1) // Success
+                {
+                    $('#idpost').val(data.id);
+                    $('#sport').val(data.namesport);
+                    $('#detail').val(data.detail);
+                    $('#works').val(data.works);
+                    $('#address').val(data.location);
+                    $('#location').val(data.amphur);
+                    $('#telephone').val(data.telephone);
+                    $('#email').val(data.email);
+
+                } else // Err
+                {
+                    alert("notshow");
+
+                }
+            }
+        });
+
+    }
+
+    function deleteekatoo(id) {
+        swal({
+                title: "คุณต้องการที่จะลบกระทู้นี้??",
+                text: "กรุณาตรวจสอบความถูกต้องก่อนกดปุ่มตกลง!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("ทำการลบเสร็จสมบูรณ์!", {
+                        icon: "success",
+
+                    });
+                    location.replace("?deletekatoo=" + id);
+
+                } else {
+                    swal("ยกเลิกรายการ!");
+                }
+            });
+    }
+
+    function deleteepost(id) {
+        swal({
+                title: "คุณกำลังทำการลบประกาศนี้?",
+                text: "กรุณาตรวจสอบความถูกต้องก่อนกดปุ่มตกลง!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("ทำการลบเสร็จสมบูรณ์!", {
+                        icon: "success",
+
+                    });
+                    location.replace("?deletepost=" + id);
+
+                } else {
+                    swal("ยกเลิกรายการ!");
+                }
+            });
+    }
+    //---------------------------------------------------------------------------------
+    $("#btneditkatoo").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "function/updatekatoo.php",
+            data: $("#updatekatoo").serialize(),
+            success: function(result) {
+                if (result.status == 1) // Success
+                {
+                    confirm(result.message);
+                    $(".close").click();
+                } else // Err
+                {
+                    confirm(result.message);
+
+                }
+            }
+        });
+
+    });
+    //------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
+        $("#btneditpost").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "function/updatepost.php",
+            data: $("#updatepost").serialize(),
+            success: function(result) {
+                if (result.status == 1) // Success
+                {
+                    confirm(result.message);
+                    $(".close").click();
+                } else // Err
+                {
+                    confirm(result.message);
+
+                }
+            }
+        });
+
+    });
+    //------------------------------------------------------------------------------------------------
 </script>
 
 <script type="text/javascript">
- function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-    reader.onload = function(e) {
-      $('#imgprofile').attr('src', e.target.result);
+            reader.onload = function(e) {
+                $('#imgprofile').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-$("#imgInp").change(function() {
-  readURL(this);
-});
+    $("#imgInp").change(function() {
+        readURL(this);
+    });
 </script>

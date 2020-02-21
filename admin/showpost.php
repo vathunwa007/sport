@@ -8,7 +8,7 @@ $sql="SELECT * FROM tb_addcoach a INNER JOIN tb_member b
 ON a.idmember = b.m_id WHERE id = '$postid' ";
 $query = mysqli_query($con,$sql) or die(mysqli_error($con));
 $showpost = mysqli_fetch_array($query);
-$total = mysqli_num_rows($query);
+$totalshowpost = mysqli_num_rows($query);
 
 $imagequery = mysqli_query($con,"SELECT * FROM `tb-postimage` WHERE idaddcoach = '$postid'")or die(mysqli_error($con));
 $showimage = mysqli_fetch_array($imagequery);
@@ -31,7 +31,7 @@ $totalimage2 = mysqli_num_rows($imagequery2);
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                 <?php $i=0; do{ ?>
-                                    <img data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i; ?>" class="active d-block w-25" src="../img/<?php  echo $showimage['image']; ?>" alt="First slide">
+                                    <img data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i; ?>" class="active d-block" src="../img/<?php  echo $showimage['image']; ?>" alt="First slide" width="50px">
 
                                    <?php $i++;}while($showimage = mysqli_fetch_assoc($imagequery)); ?>
 

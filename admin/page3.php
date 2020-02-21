@@ -24,7 +24,7 @@ if(isset($_GET['id'])){
         <!-- Button trigger modal -->
 
 
-        <div class="table-responsive " style="width: s;">
+        <div class="table-responsive " style="width:100%;">
             <table class="table" id="datatable">
                 <thead class="text-secondary">
 
@@ -91,7 +91,7 @@ if(isset($_GET['id'])){
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modaleditkatoo -->
 <div class="modal fade mt-5" id="editkatoo" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
