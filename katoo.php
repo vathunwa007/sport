@@ -2,6 +2,9 @@
 $navbar = array("", "", "active", "", "");
 require_once "function/connect.php";
 $idkatoo = $_REQUEST['id'];
+if($idkatoo == null){
+    echo "<script>window.location = 'home2.php';</script>";
+}
 $sql = "SELECT * FROM `tb_katoo` WHERE id = $idkatoo";
 $query = mysqli_query($con, $sql) or die(mysqli_error($con));
 $row_showkatoo = mysqli_fetch_array($query);

@@ -2,6 +2,9 @@
 $navbar = array("", "active", "", "", "");
 require_once "function/connect.php";
 $postid = $_REQUEST['id'];
+if($postid == null){
+    echo "<script>window.location = 'home1.php';</script>";
+}
 $sql = "SELECT * FROM tb_addcoach a INNER JOIN tb_member b
 ON a.idmember = b.m_id WHERE id = '$postid' ";
 $query = mysqli_query($con, $sql) or die(mysqli_error($con));

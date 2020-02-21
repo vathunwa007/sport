@@ -330,7 +330,7 @@ $row_settingpost = mysqli_fetch_array($querysettingpost);
                 </button>
             </div>
             <div class="modal-body">
-
+                <?php if($row_settingpost == null){ echo "<h5 class='text-danger text-center'>ยังไม่มีประกาศสอนของคุณณตอนนี้</h5>";}else{?>
                 <div class="table-responsive " style="width:100%;">
                     <table class="table" id="datatable">
                         <thead class="text-secondary">
@@ -377,7 +377,7 @@ $row_settingpost = mysqli_fetch_array($querysettingpost);
                             <?php } while ($row_settingpost = mysqli_fetch_assoc($querysettingpost)); ?>
                         </tbody>
                     </table>
-                </div>
+                            </div><?php } ?>
 
             </div>
 
@@ -473,7 +473,7 @@ $row_settingkatoo = mysqli_fetch_array($querysettingkatoo);
             </div>
             <div class="modal-body">
                 <?php if ($row_settingkatoo == null) {
-                    echo " <h5 class='text-danger'>ยังไม่มีกระทู้ที่คุณสร้าง</h5>";
+                    echo " <h5 class='text-danger text-center'>ยังไม่มีกระทู้ที่คุณสร้าง</h5>";
                 } else { ?>
                     <div class="table-responsive " style="width:100%;">
                         <table class="table" id="datatable">
@@ -681,7 +681,8 @@ $row_settingkatoo = mysqli_fetch_array($querysettingkatoo);
                         icon: "success",
 
                     });
-                    location.replace("?deletekatoo=" + id);
+                    //location.replace("?deletekatoo=" + id);
+                    window.location = document.referrer + "?&deletekatoo="+id;
 
                 } else {
                     swal("ยกเลิกรายการ!");
@@ -703,7 +704,8 @@ $row_settingkatoo = mysqli_fetch_array($querysettingkatoo);
                         icon: "success",
 
                     });
-                    location.replace("?deletepost=" + id);
+                    //location.replace("?&deletepost=" + id);
+                    window.location = document.referrer + "?&deletepost="+id;
 
                 } else {
                     swal("ยกเลิกรายการ!");
